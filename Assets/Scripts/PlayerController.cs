@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float FlyVelocity = 6f;
     
     private Rigidbody2D _rb;
+    
     void Start()
     {
         Init();
