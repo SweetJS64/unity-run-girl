@@ -13,20 +13,16 @@ public class LayerBackground : ScriptableObject
     
     public void InstantiateLayers()
     {
-        var width = PrefabBg.GetComponent<SpriteRenderer>().bounds.size.x;
-        _firstBg = Instantiate(PrefabBg, new Vector3(Position.x, Position.y, 0), Quaternion.identity);
-        _secondBg = Instantiate(PrefabBg, new Vector3(Position.x + width, Position.y, 0), Quaternion.identity);
         _width = PrefabBg.GetComponent<SpriteRenderer>().bounds.size.x;
-        
+        _firstBg = Instantiate(PrefabBg, new Vector3(Position.x, Position.y, 0), Quaternion.identity);
+        _secondBg = Instantiate(PrefabBg, new Vector3(Position.x + _width, Position.y, 0), Quaternion.identity);
     }
+    
+    //getSetNeParasha
+    public float Width => _width;
 
-    public float Width
-    {
-        get { return _width; }
-    }
     public GameObject[] GetLayersArray 
     {
         get { return new[] { _firstBg, _secondBg }; }
     }
-    
 }

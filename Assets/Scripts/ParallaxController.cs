@@ -39,7 +39,7 @@ public class ParallaxController : MonoBehaviour
                 if (layersArray[j].transform.position.x <= -layerBackground.Width)
                 {
                     layersArray[j].transform.position = new Vector3(
-                        layersArray[j].transform.position.x + 2 * layerBackground.Width, 
+                        layersArray[j].transform.position.x + 2 * layerBackground.Width,
                         layersArray[j].transform.position.y, 
                         layersArray[j].transform.position.z);
                 }
