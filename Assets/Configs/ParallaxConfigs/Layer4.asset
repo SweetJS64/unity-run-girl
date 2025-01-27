@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c3ad314994a7649925aad226a84c45, type: 3}
   m_Name: Layer4
   m_EditorClassIdentifier: 
-  SpriteTexture: {fileID: 21300000, guid: 17729fe1353b2f247bf96445ab7798b1, type: 3}
-  Speed: 0.8
+  SpriteTexture: {fileID: 21300000, guid: 0ceb3b7f07f8bff499799cb7cfa69fcd, type: 3}
+  Speed: 0.2

@@ -650,8 +650,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a58aa258346ec4b87bb2f6e24759b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaterialForParallax: {fileID: 2100000, guid: 8784c6fb4dbf8d94f9098c5c2b397325, type: 2}
-  ConfigsLayers:
+  ParallaxMaterialTemplate: {fileID: 2100000, guid: 8784c6fb4dbf8d94f9098c5c2b397325, type: 2}
+  LayerConfigs:
   - {fileID: 11400000, guid: 607ed917bf7880b4ab1604275cbd88b0, type: 2}
   - {fileID: 11400000, guid: 49132e96e66f15a4a831154cfdec9bf8, type: 2}
   - {fileID: 11400000, guid: f27d66d985eec0d449025f40df1b8205, type: 2}

@@ -2,13 +2,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float MaxFlyVelocity = 6f;
-    
-    private float _flyVelocity = 0.5f;
+    [SerializeField] private float FlyVelocity = 6f;
     private Rigidbody2D _rb;
     private Animator _anim;
-    private bool _isJumping;
-    
     
     void Start()
     {
@@ -21,10 +17,6 @@ public class PlayerController : MonoBehaviour
         {
             Fly();
         }
-        else
-        {
-            _flyVelocity = 0.5f;
-        }
     }
 
     private void Init()
@@ -35,14 +27,13 @@ public class PlayerController : MonoBehaviour
 
     private void Fly()
     {
-        if (_flyVelocity < MaxFlyVelocity) _flyVelocity += 0.2f;
-        _rb.velocity = new Vector2(0, _flyVelocity);
-        _anim.SetBool("isJump", true);
+        _rb.velocity = new Vector2(0, Mathf.Lerp(_rb.velocity.y, FlyVelocity, 0.1f));
+        _anim.SetBool("isFly", true);   
         
     }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        _anim.SetBool("isJump", false);
+        _anim.SetBool("isFly", false);
     }
 }

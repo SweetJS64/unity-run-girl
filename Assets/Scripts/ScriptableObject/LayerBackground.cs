@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CustomParallaxConfiguration", menuName = "Configurations/ParallaxConfiguration")]
+[CreateAssetMenu(fileName = "LayerDataConfig", menuName = "Configurations/ParallaxConfiguration")]
 public class LayerBackground : ScriptableObject
 {
     public Sprite SpriteTexture;
