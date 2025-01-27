@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c3ad314994a7649925aad226a84c45, type: 3}
   m_Name: Layer2
   m_EditorClassIdentifier: 
-  PrefabBg: {fileID: 2528027122531131402, guid: b86d03504fac0ae42a528adb12b02dd8, type: 3}
-  Position: {x: 0, y: 0}
-  Speed: 1.5
+  SpriteTexture: {fileID: 21300000, guid: f742986c8cfb0f9408700b55894aba73, type: 3}
+  Speed: 0.3

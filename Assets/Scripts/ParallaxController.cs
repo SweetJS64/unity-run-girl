@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class ParallaxController : MonoBehaviour
 {
-    [SerializeField] private LayerBackground[] ParallaxLayers = new LayerBackground[4];
-
-    private float _speedBoost = 0; //TODO: when adding game acceleration;
+    //[SerializeField] private float SpeedBoost = 0f; //TODO: when adding game acceleration;
+    [SerializeField] private Material MaterialForParallax;
+    [SerializeField] private LayerBackground[] ConfigsLayers = new LayerBackground[5];
+    private MeshRenderer[] _meshRenderersArray;
     
+    private Vector2 _offset;
     void Start()
     {
         Init();
@@ -13,37 +15,27 @@ public class ParallaxController : MonoBehaviour
 
     void Update()
     {
-        MoveBackgroundArray(ParallaxLayers);
+        ScrollingLayers();
     }
 
     private void Init()
     {
-        for (int i = 0; i < ParallaxLayers.Length; i++)
+        _meshRenderersArray = GetComponentsInChildren<MeshRenderer>();
+        for (int i = 0; i < _meshRenderersArray.Length; i++)
         {
-            ParallaxLayers[i].InstantiateLayers();
+            _meshRenderersArray[i].material = MaterialForParallax;
+            _meshRenderersArray[i].material.mainTexture = ConfigsLayers[i].SpriteTexture.texture;
+            _meshRenderersArray[i].material.renderQueue = i;
         }
     }
-    
-    private void MoveBackgroundArray(LayerBackground[] layerBackgrounds)
-    {
-        var dt = Time.deltaTime;
 
-        foreach (var layerBackground in layerBackgrounds)
+    private void ScrollingLayers()
+    {
+        for (int i = 0; i < _meshRenderersArray.Length; i++)
         {
-            var speed = (layerBackground.Speed + _speedBoost) * dt;
-            var layersArray = layerBackground.GetLayersArray;
-            
-            for (int j = 0; j < layersArray.Length; j++)
-            {
-                layersArray[j].transform.Translate( Vector3.left * speed);
-                if (layersArray[j].transform.position.x <= -layerBackground.Width)
-                {
-                    layersArray[j].transform.position = new Vector3(
-                        layersArray[j].transform.position.x + 2 * layerBackground.Width,
-                        layersArray[j].transform.position.y, 
-                        layersArray[j].transform.position.z);
-                }
-            }
+            var offset = new Vector2 (_meshRenderersArray[i].material.mainTextureOffset.x + 
+                                      ConfigsLayers[i].Speed * Time.deltaTime, 0);
+            _meshRenderersArray[i].material.mainTextureOffset = offset;
         }
     }
 }

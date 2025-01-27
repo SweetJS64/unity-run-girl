@@ -41,16 +41,19 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Backgrond
+  - name: BgLayer0
     uniqueID: 1017491955
     locked: 0
-  - name: Midground 0
+  - name: BgLayer1
     uniqueID: 2602716327
     locked: 0
-  - name: Midground 1
+  - name: BgLayer2
     uniqueID: 1023243451
     locked: 0
-  - name: Foreground
+  - name: BgLayer3
+    uniqueID: 1674824509
+    locked: 0
+  - name: BgLayer4
     uniqueID: 791253155
     locked: 0
   - name: Player
