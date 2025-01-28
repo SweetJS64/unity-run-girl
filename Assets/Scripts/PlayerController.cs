@@ -32,8 +32,26 @@ public class PlayerController : MonoBehaviour
         
     }
     
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnEnable()
+    {
+        FloorTrigger.PlayerOnFloor += OnFloor;
+        ObstacleTrigger.OnPlayerHit += DiePlayer;
+    }
+
+    private void OnDisable()
+    {
+        FloorTrigger.PlayerOnFloor -= OnFloor;
+        ObstacleTrigger.OnPlayerHit -= DiePlayer;
+    }
+
+    private void OnFloor()
     {
         _anim.SetBool("isFly", false);
     }
+
+    private void DiePlayer()
+    {
+        Debug.Log("you die");
+    }
+
 }

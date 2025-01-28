@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Floor
+  - 'Obstacle '
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -57,5 +60,5 @@ TagManager:
     uniqueID: 791253155
     locked: 0
   - name: Player
-    uniqueID: 2005661825
+    uniqueID: 3260314347
     locked: 0

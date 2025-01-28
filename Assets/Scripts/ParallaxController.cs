@@ -4,9 +4,9 @@ public class ParallaxController : MonoBehaviour
 {
     [SerializeField] private Material ParallaxMaterialTemplate;
     [SerializeField] private LayerBackground[] LayerConfigs;
+    [SerializeField] private float ParallaxSpeed;
     //[SerializeField] private float SpeedBoost; //TODO: when adding game acceleration;
     private MeshRenderer[] _meshRenderersArray;
-    private Vector2[] _textureOffsets;
     
     void Start()
     {
@@ -21,7 +21,6 @@ public class ParallaxController : MonoBehaviour
     private void Init()
     {
         _meshRenderersArray = GetComponentsInChildren<MeshRenderer>();
-        _textureOffsets = new Vector2[_meshRenderersArray.Length];
         
         if (_meshRenderersArray.Length != LayerConfigs.Length)
         {
@@ -41,8 +40,8 @@ public class ParallaxController : MonoBehaviour
     {
         for (int i = 0; i < _meshRenderersArray.Length; i++)
         {
-            _textureOffsets[i].x += LayerConfigs[i].Speed * Time.deltaTime;
-            _meshRenderersArray[i].material.mainTextureOffset = _textureOffsets[i];
+            var offset = new Vector2(LayerConfigs[i].Speed * Time.deltaTime, 0);
+            _meshRenderersArray[i].material.mainTextureOffset += offset;
         }
     }
 }
