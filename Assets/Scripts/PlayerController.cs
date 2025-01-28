@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || Input.touchCount > 0)
         {
             Fly();
         }
@@ -47,10 +47,12 @@ public class PlayerController : MonoBehaviour
     private void OnFloor()
     {
         _anim.SetBool("isFly", false);
+        Debug.Log("you on floor");
     }
 
     private void DiePlayer()
     {
+        _anim.SetBool("isDie", true);
         Debug.Log("you die");
     }
 

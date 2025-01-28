@@ -5,8 +5,10 @@ public class ParallaxController : MonoBehaviour
     [SerializeField] private Material ParallaxMaterialTemplate;
     [SerializeField] private LayerBackground[] LayerConfigs;
     [SerializeField] private float ParallaxSpeed;
-    //[SerializeField] private float SpeedBoost; //TODO: when adding game acceleration;
+
     private MeshRenderer[] _meshRenderersArray;
+    private float _speedBoost = 1f;// add abstact class?
+    private bool _isSmoothStop;// add abstact class?
     
     void Start()
     {
@@ -16,6 +18,7 @@ public class ParallaxController : MonoBehaviour
     void Update()
     {
         ParallaxUpdate();
+        if (_isSmoothStop) SmoothStop();// add abstact class?
     }
 
     private void Init()
@@ -40,8 +43,24 @@ public class ParallaxController : MonoBehaviour
     {
         for (int i = 0; i < _meshRenderersArray.Length; i++)
         {
-            var offset = new Vector2(LayerConfigs[i].Speed * Time.deltaTime, 0);
+            var offset = new Vector2(LayerConfigs[i].Speed * _speedBoost * Time.deltaTime, 0);
             _meshRenderersArray[i].material.mainTextureOffset += offset;
         }
+    }
+    
+    private void OnEnable()
+    {
+        ObstacleTrigger.OnPlayerHit += SmoothStop;
+    }
+
+    private void OnDisable()
+    {
+        ObstacleTrigger.OnPlayerHit -= SmoothStop;
+    }
+
+    private void SmoothStop()// add abstact class?
+    {
+        _isSmoothStop = true;
+        _speedBoost = Mathf.Lerp(_speedBoost, 0, 0.1f);
     }
 }
