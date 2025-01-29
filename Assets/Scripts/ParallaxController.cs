@@ -35,7 +35,7 @@ public class ParallaxController : MonoBehaviour
         {
             _meshRenderersArray[i].material = ParallaxMaterialTemplate;
             _meshRenderersArray[i].material.mainTexture = LayerConfigs[i].SpriteTexture.texture;
-            _meshRenderersArray[i].material.renderQueue = 3000 + i * 10;
+            _meshRenderersArray[i].material.renderQueue = 1000 + i * 10;
         }
     }
 

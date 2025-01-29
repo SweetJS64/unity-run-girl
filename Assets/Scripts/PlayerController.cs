@@ -3,8 +3,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float FlyVelocity = 6f;
+    [SerializeField] private GameObject FlyMagiceffect;
     private Rigidbody2D _rb;
     private Animator _anim;
+    private bool _die;
     
     void Start()
     {
@@ -13,20 +15,21 @@ public class PlayerController : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.Space) || Input.touchCount > 0)
-        {
-            Fly();
-        }
+        if (Input.GetKey(KeyCode.Space) || Input.touchCount > 0) Fly();
+        //if (Input.GetKeyUp(KeyCode.Space)) FlyMagiceffect.SetActive(false);
     }
 
     private void Init()
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
+        FlyMagiceffect.SetActive(false);
     }
 
     private void Fly()
     {
+        if (_die) return;
+        FlyMagiceffect.SetActive(true);
         _rb.velocity = new Vector2(0, Mathf.Lerp(_rb.velocity.y, FlyVelocity, 0.1f));
         _anim.SetBool("isFly", true);   
         
@@ -47,13 +50,14 @@ public class PlayerController : MonoBehaviour
     private void OnFloor()
     {
         _anim.SetBool("isFly", false);
-        Debug.Log("you on floor");
+        FlyMagiceffect.SetActive(false);
     }
 
     private void DiePlayer()
     {
+        FlyMagiceffect.SetActive(false);
         _anim.SetBool("isDie", true);
-        FlyVelocity = 0;
+        _die = true;
     }
 
 }
