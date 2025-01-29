@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     private void DiePlayer()
     {
         _anim.SetBool("isDie", true);
-        Debug.Log("you die");
+        FlyVelocity = 0;
     }
 
 }
