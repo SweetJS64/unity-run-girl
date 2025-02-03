@@ -10,12 +10,12 @@ public class ParallaxController : MonoBehaviour, IScrollingObject
     private float _speedBoost = 1f;
     private bool _isSmoothStop;
     
-    void Start()
+    private void Start()
     {
         Init();
     }
 
-    void Update()
+    private void Update()
     {
         UpdateScrolling();
         if (_isSmoothStop) StopScrolling();

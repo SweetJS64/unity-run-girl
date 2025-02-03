@@ -8,12 +8,12 @@ public class PlayerController : MonoBehaviour
     private Animator _anim;
     private bool _die;
     
-    void Start()
+    private void Start()
     {
         Init();
     }
     
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.Space) || Input.touchCount > 0) Fly();
     }

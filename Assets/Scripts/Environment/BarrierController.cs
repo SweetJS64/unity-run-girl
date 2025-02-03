@@ -4,16 +4,16 @@ public class BarrierController : MonoBehaviour, IScrollingObject
 {
     [SerializeField] private float TransformMove = 1.8f;
     
-    private Transform[] _barriersTransformArray;
+    private Transform[] _barriersTransforms;
     private float _speedBoost = 1f;
     private bool _isSmoothStop;
     
-    void Start()
+    private void Start()
     {
         Init();
     }
     
-    void Update()
+    private void Update()
     {
         UpdateScrolling();
         if (_isSmoothStop) StopScrolling();
@@ -21,7 +21,7 @@ public class BarrierController : MonoBehaviour, IScrollingObject
 
     private void Init()
     {
-        _barriersTransformArray = GetComponentsInChildren<Transform>();
+        _barriersTransforms = GetComponentsInChildren<Transform>();
     }
     
     private void OnEnable()
@@ -36,10 +36,10 @@ public class BarrierController : MonoBehaviour, IScrollingObject
 
     public void UpdateScrolling()
     {
-        for (int i = 0; i < _barriersTransformArray.Length; i++)
+        for (int i = 0; i < _barriersTransforms.Length; i++)
         {
             var offset = new Vector3(-TransformMove * _speedBoost * Time.deltaTime, 0, 0);
-            _barriersTransformArray[i].position += offset;
+            _barriersTransforms[i].position += offset;
         }
     }
     

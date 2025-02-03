@@ -4,12 +4,12 @@ public class TargetFps : MonoBehaviour
 {
     [SerializeField] private int Target = 60;
 
-    void Awake()
+    private void Awake()
     {
         Application.targetFrameRate = Target;
     }
 
-    void Update()
+    private void Update()
     {
         if (Application.targetFrameRate != Target)
             Application.targetFrameRate = Target;
