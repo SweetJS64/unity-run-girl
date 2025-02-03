@@ -21118,7 +21118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FlyVelocity: 6
-  FlyMagicEffect: {fileID: 0}
+  FlyMagicEffect: {fileID: 265524000}
 --- !u!50 &1951538719
 Rigidbody2D:
   serializedVersion: 4
