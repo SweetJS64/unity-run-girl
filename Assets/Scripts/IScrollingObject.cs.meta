@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: d3a58aa258346ec4b87bb2f6e24759b2
+guid: 9f13f11501a66814f84256b757e27b18
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - ParallaxMaterialTemplate: {fileID: 2100000, guid: 8784c6fb4dbf8d94f9098c5c2b397325, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

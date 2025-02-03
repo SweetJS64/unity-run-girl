@@ -13812,6 +13812,7 @@ Transform:
   m_Children:
   - {fileID: 1558837022}
   - {fileID: 626052108}
+  - {fileID: 4419709231047785300}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21117,7 +21118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FlyVelocity: 6
-  FlyMagiceffect: {fileID: 265524000}
+  FlyMagicEffect: {fileID: 0}
 --- !u!50 &1951538719
 Rigidbody2D:
   serializedVersion: 4
@@ -22479,7 +22480,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1430955327}
     m_Modifications:
     - target: {fileID: 2368531663583065722, guid: cbb744ee9bbfdcf46ac5e99abab51291, type: 3}
       propertyPath: m_Name
@@ -22511,7 +22512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7673921453423922345, guid: cbb744ee9bbfdcf46ac5e99abab51291, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7673921453423922345, guid: cbb744ee9bbfdcf46ac5e99abab51291, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22531,15 +22532,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7673921453423922345, guid: cbb744ee9bbfdcf46ac5e99abab51291, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7673921453423922345, guid: cbb744ee9bbfdcf46ac5e99abab51291, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7673921453423922345, guid: cbb744ee9bbfdcf46ac5e99abab51291, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7673921453423922345, guid: cbb744ee9bbfdcf46ac5e99abab51291, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -22558,3 +22559,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbb744ee9bbfdcf46ac5e99abab51291, type: 3}
+--- !u!4 &4419709231047785300 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7673921453423922345, guid: cbb744ee9bbfdcf46ac5e99abab51291, type: 3}
+  m_PrefabInstance: {fileID: 4419709231047785299}
+  m_PrefabAsset: {fileID: 0}
