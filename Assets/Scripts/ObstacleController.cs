@@ -11,19 +11,9 @@ public class ObstacleController : MonoBehaviour, IScrollingObject
     private bool _isSmoothStop;
     private float _widthSprite;
     
-    private void Start()
+    private void Awake()
     {
-        var childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-        _widthSprite = childSpriteRenderers[0].bounds.size.x;
-        _cameraMain = Camera.main;
-        if (_cameraMain == null)
-        {
-            Debug.LogError("_cameraMain == null");
-            return;
-        }
-        _spawnPos = _cameraMain.ViewportToWorldPoint(new Vector3(1, 0.5f, 0)) + new Vector3(_widthSprite, 0, 0)/2;
-        _stopPos = _cameraMain.ViewportToWorldPoint(new Vector3(0, 0.5f, 0)) - new Vector3(_widthSprite, 0, 0)/2;
-        transform.position = new Vector3(_spawnPos.x, transform.position.y, transform.position.z);
+        Init();
     }
     private void Update()
     {
@@ -34,12 +24,29 @@ public class ObstacleController : MonoBehaviour, IScrollingObject
     private void OnEnable()
     {
         ObstacleTrigger.OnPlayerHit += StopScrolling;
+        transform.position = _spawnPos;
+        Debug.Log("OnEnable");
     }
 
     private void OnDisable()
     {
         ObstacleTrigger.OnPlayerHit -= StopScrolling;
-        transform.position = new Vector3(_spawnPos.x, transform.position.y, transform.position.z);
+    }
+
+    private void Init()
+    {
+        var childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        _widthSprite = childSpriteRenderers[0].bounds.size.x;
+        //мб тут перемудрил
+        _cameraMain = Camera.main;
+        if (_cameraMain == null)
+        {
+            Debug.LogError("_cameraMain == null");
+            return;
+        }
+        _spawnPos = _cameraMain.ViewportToWorldPoint(new Vector3(1, 0.5f, 0)) + new Vector3(_widthSprite, 0, 0)/2;
+        _stopPos = -_spawnPos;
+        Debug.Log(_spawnPos);
     }
 
     public void UpdateScrolling()
@@ -50,8 +57,11 @@ public class ObstacleController : MonoBehaviour, IScrollingObject
             return;
         }
         
-        var offset = new Vector3(-TransformMove * _speedBoost * Time.deltaTime, 0, 0);
-        transform.position += offset;
+        var offset = new Vector3(
+            TransformMove * _speedBoost * Time.deltaTime, 
+            transform.position.y, 
+            transform.position.z);
+        transform.position -= offset;
     }
     
     public void StopScrolling()

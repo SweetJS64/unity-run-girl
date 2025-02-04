@@ -23,7 +23,6 @@ public class ObstaclesSpawner : MonoBehaviour
     private void Awake()
     {
         InstantiatePrefabs();
-        Debug.Log("ObstacleSpawnerAwake");
     }
     private void Start()
     {
@@ -55,6 +54,7 @@ public class ObstaclesSpawner : MonoBehaviour
     {
         _spawnInterval = MinSpawnInterval;
         _nextObstacle = Random.Range(0, _obstaclesObjects.Length - 1);
+        _lastObstacle = _penultimateObstacle = _nextObstacle;
     }
     
     private void Timer()
