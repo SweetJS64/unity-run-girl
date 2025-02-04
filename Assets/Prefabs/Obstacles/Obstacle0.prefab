@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1273028453165421179}
-  - component: {fileID: 1273028453165421176}
+  - component: {fileID: -2502593667572379828}
   m_Layer: 0
   m_Name: Obstacle0
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1273028453165421176
+--- !u!114 &-2502593667572379828
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5617b9e1a8a0398439f2caf06576b029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransformMove: 1.8
+  TransformMove: 3.6
 --- !u!1 &1273028454377849286
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 1273028454377849282}
   - component: {fileID: 1273028454377849283}
   - component: {fileID: 1273028454377849280}
-  - component: {fileID: 1273028454377849293}
+  - component: {fileID: 1686073467736194242}
   m_Layer: 0
   m_Name: Barrier0
   m_TagString: 'Obstacle '
@@ -196,7 +196,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!114 &1273028454377849293
+--- !u!114 &1686073467736194242
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 1273028454540625455}
   - component: {fileID: 1273028454540625452}
   - component: {fileID: 1273028454540625453}
-  - component: {fileID: 1273028454540625454}
+  - component: {fileID: 5037262150442743609}
   m_Layer: 0
   m_Name: Barrier1
   m_TagString: 'Obstacle '
@@ -357,7 +357,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!114 &1273028454540625454
+--- !u!114 &5037262150442743609
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
