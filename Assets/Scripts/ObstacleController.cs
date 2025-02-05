@@ -7,9 +7,9 @@ public class ObstacleController : MonoBehaviour, IScrollingObject
     private Camera _cameraMain;
     private Vector3 _spawnPos;
     private Vector3 _stopPos;
-    private float _speedBoost = 1f;
     private bool _isSmoothStop;
     private float _widthSprite;
+    private static float _speedBoost = 1f;
     
     private void Awake()
     {
@@ -24,13 +24,14 @@ public class ObstacleController : MonoBehaviour, IScrollingObject
     private void OnEnable()
     {
         ObstacleTrigger.OnPlayerHit += StopScrolling;
+        DistanceTracker.GameSpeedUp += SpeedUp;
         transform.position = _spawnPos;
-        Debug.Log("OnEnable");
     }
 
     private void OnDisable()
     {
         ObstacleTrigger.OnPlayerHit -= StopScrolling;
+        DistanceTracker.GameSpeedUp -= SpeedUp;
     }
 
     private void Init()
@@ -46,7 +47,6 @@ public class ObstacleController : MonoBehaviour, IScrollingObject
         }
         _spawnPos = _cameraMain.ViewportToWorldPoint(new Vector3(1, 0.5f, 0)) + new Vector3(_widthSprite, 0, 0)/2;
         _stopPos = -_spawnPos;
-        Debug.Log(_spawnPos);
     }
 
     public void UpdateScrolling()
@@ -68,5 +68,11 @@ public class ObstacleController : MonoBehaviour, IScrollingObject
     {
         _isSmoothStop = true;
         _speedBoost = Mathf.Lerp(_speedBoost, 0, 0.1f);
+    }
+    
+    private void SpeedUp(float boost)
+    {
+        _speedBoost += boost;
+        //Debug.Log($"SpeedUpObstacles: {_speedBoost}");
     }
 }

@@ -42,11 +42,13 @@ public class ParallaxController : MonoBehaviour, IScrollingObject
     private void OnEnable()
     {
         ObstacleTrigger.OnPlayerHit += StopScrolling;
+        DistanceTracker.GameSpeedUp += SpeedUp;
     }
 
     private void OnDisable()
     {
         ObstacleTrigger.OnPlayerHit -= StopScrolling;
+        DistanceTracker.GameSpeedUp -= SpeedUp;
     }
     
     public void UpdateScrolling()
@@ -62,5 +64,11 @@ public class ParallaxController : MonoBehaviour, IScrollingObject
     {
         _isSmoothStop = true;
         _speedBoost = Mathf.Lerp(_speedBoost, 0, 0.1f);
+    }
+    
+    private void SpeedUp(float boost)
+    {
+        _speedBoost += boost;
+        //Debug.Log($"SpeedUpParallax: {_speedBoost}");
     }
 }
