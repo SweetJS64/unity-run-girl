@@ -711,8 +711,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 6
-  SpeedIncreaseStep: 0.1
-  DistanceForSpeedIncrease: 100
+  SpeedBoostStep: 0.1
+  DistanceForBoost: 50
 --- !u!114 &627031618
 MonoBehaviour:
   m_ObjectHideFlags: 0

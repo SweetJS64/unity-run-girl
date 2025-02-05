@@ -11,7 +11,7 @@ public class DistanceTracker : MonoBehaviour
     
     private Text _distanceText;
     private float _distanceTravelled;
-    private float _speedBoost;
+    private float _speedBoost = 1f;
 
     public static event Action<float>  GameSpeedUp;
     
@@ -32,7 +32,7 @@ public class DistanceTracker : MonoBehaviour
 
 private void UpdateDistance()
     {
-        _distanceTravelled += Speed * Time.deltaTime;
+        _distanceTravelled += Speed * _speedBoost * Time.deltaTime;
         _distanceText.text = $"{(int)_distanceTravelled} M.";
 
         if ((int)_distanceTravelled % DistanceForBoost == 0 && _distanceTravelled >= DistanceForBoost)
