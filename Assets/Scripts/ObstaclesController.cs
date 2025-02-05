@@ -3,8 +3,8 @@ using Random = UnityEngine.Random;
 
 public class ObstaclesController : MonoBehaviour
 {
-    //[SerializeField] private float MaxSpawnInterval; //TODO: Add random interval
-    [SerializeField] private float MinSpawnInterval = 4f;
+    [SerializeField] private float MaxSpawnInterval = 4f;
+    [SerializeField] private float MinSpawnInterval = 2f;
     
     [SerializeField] private GameObject[] ObstaclePrefabs;
 
@@ -21,6 +21,8 @@ public class ObstaclesController : MonoBehaviour
     private Transform[] _obstaclesObjects;
 
     public float SpeedBoost { get; private set; } = 1f;
+    //private float _lerpSpeedBoost;
+    //private float _lerpStepBoost;
 
     private void Awake()
     {
@@ -36,7 +38,17 @@ public class ObstaclesController : MonoBehaviour
         if (_stopSpawn) return;
         Timer();
         Spawn();
+        //LerpSpeedUp();
     }
+
+    /*private void LerpSpeedUp()
+    //ты все сломал, лох.
+    {
+        while (SpeedBoost != _lerpSpeedBoost)
+        {
+            SpeedBoost = Mathf.Lerp(SpeedBoost, _lerpSpeedBoost, _lerpStepBoost/10);
+        }
+    }*/
 
     private void InstantiatePrefabs()
     {
@@ -75,6 +87,7 @@ public class ObstaclesController : MonoBehaviour
         _obstaclesObjects[_nextObstacle].gameObject.SetActive(true);
         
         _spawnTimer = 0;
+        _spawnInterval = Random.Range(MinSpawnInterval, MaxSpawnInterval);
         
         _penultimateObstacle = _lastObstacle;
         _lastObstacle = _nextObstacle;

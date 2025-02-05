@@ -711,7 +711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 6
-  SpeedBoostStep: 0.1
+  SpeedBoostStep: 0.01
   DistanceForBoost: 50
 --- !u!114 &627031618
 MonoBehaviour:
@@ -1573,7 +1573,7 @@ ParticleSystem:
         m_RotationOrder: 4
   ShapeModule:
     serializedVersion: 6
-    enabled: 1
+    enabled: 0
     type: 19
     angle: 25
     length: 5
@@ -6249,7 +6249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14fe99e9dd3898d47a5bfd7b5e48623b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinSpawnInterval: 4
+  MaxSpawnInterval: 5
+  MinSpawnInterval: 2
   ObstaclePrefabs:
   - {fileID: 1273028453165421177, guid: 9a1d2e82bb48a4e4f856bd1a59d501f5, type: 3}
   - {fileID: 3650000257583772974, guid: 28f2d67294d357c4cafbbe5f1a093743, type: 3}
