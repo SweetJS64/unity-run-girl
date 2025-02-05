@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class ObstacleController : MonoBehaviour, IScrollingObject
+public class ObstacleMover : MonoBehaviour, IScrollingObject
 {
     [SerializeField] private float TransformMove = 3.6f;
     
     private Camera _cameraMain;
+    private ObstaclesController _obstaclesController;
     private Vector3 _spawnPos;
     private Vector3 _stopPos;
     private bool _isSmoothStop;
@@ -24,19 +25,18 @@ public class ObstacleController : MonoBehaviour, IScrollingObject
     private void OnEnable()
     {
         ObstacleTrigger.OnPlayerHit += StopScrolling;
-        DistanceTracker.GameSpeedUp += SpeedUp;
         transform.position = _spawnPos;
     }
 
     private void OnDisable()
     {
         ObstacleTrigger.OnPlayerHit -= StopScrolling;
-        DistanceTracker.GameSpeedUp -= SpeedUp;
     }
 
     private void Init()
     {
         var childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        _obstaclesController = GetComponentInParent<ObstaclesController>();
         _widthSprite = childSpriteRenderers[0].bounds.size.x;
         //мб тут перемудрил
         _cameraMain = Camera.main;
@@ -56,7 +56,7 @@ public class ObstacleController : MonoBehaviour, IScrollingObject
             gameObject.SetActive(false);
             return;
         }
-        
+        _speedBoost = _obstaclesController.SpeedBoost;
         var offset = new Vector3(
             TransformMove * _speedBoost * Time.deltaTime, 
             transform.position.y, 
@@ -68,11 +68,5 @@ public class ObstacleController : MonoBehaviour, IScrollingObject
     {
         _isSmoothStop = true;
         _speedBoost = Mathf.Lerp(_speedBoost, 0, 0.1f);
-    }
-    
-    private void SpeedUp(float boost)
-    {
-        _speedBoost += boost;
-        //Debug.Log($"SpeedUpObstacles: {_speedBoost}");
     }
 }

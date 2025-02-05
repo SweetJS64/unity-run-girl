@@ -1,7 +1,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class ObstaclesSpawner : MonoBehaviour
+public class ObstaclesController : MonoBehaviour
 {
     //[SerializeField] private float MaxSpawnInterval; //TODO: Add random interval
     [SerializeField] private float MinSpawnInterval = 4f;
@@ -19,6 +19,8 @@ public class ObstaclesSpawner : MonoBehaviour
     private bool _stopSpawn;
     
     private Transform[] _obstaclesObjects;
+
+    public float SpeedBoost { get; private set; } = 1f;
 
     private void Awake()
     {
@@ -90,15 +92,22 @@ public class ObstaclesSpawner : MonoBehaviour
     private void OnEnable()
     {
         ObstacleTrigger.OnPlayerHit += StopSpawn;
+        DistanceTracker.GameSpeedUp += SpeedUp;
     }
 
     private void OnDisable()
     {
         ObstacleTrigger.OnPlayerHit -= StopSpawn;
+        DistanceTracker.GameSpeedUp -= SpeedUp;
     }
 
     private void StopSpawn()
     {
         _stopSpawn = true;
+    }
+    
+    private void SpeedUp(float boost)
+    {
+        SpeedBoost += boost;
     }
 }

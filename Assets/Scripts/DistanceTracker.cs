@@ -32,7 +32,7 @@ public class DistanceTracker : MonoBehaviour
 
 private void UpdateDistance()
     {
-        _distanceTravelled += Speed * _speedBoost * Time.deltaTime;
+        _distanceTravelled += Speed * Time.deltaTime;
         _distanceText.text = $"{(int)_distanceTravelled} M.";
 
         if ((int)_distanceTravelled % DistanceForBoost == 0 && _distanceTravelled >= DistanceForBoost)
@@ -43,7 +43,7 @@ private void UpdateDistance()
 
     private void SpeedUp()
     {
-        Speed += SpeedBoostStep;
+        _speedBoost += SpeedBoostStep;
         GameSpeedUp?.Invoke(SpeedBoostStep);
         //Debug.Log("SpeedUp");
     }
