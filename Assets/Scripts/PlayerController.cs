@@ -1,3 +1,4 @@
+using UI;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -24,15 +25,6 @@ public class PlayerController : MonoBehaviour
         _anim = GetComponent<Animator>();
         FlyMagicEffect.SetActive(false);
     }
-
-    private void Fly()
-    {
-        if (_die) return;
-        FlyMagicEffect.SetActive(true);
-        _rb.velocity = new Vector2(0, Mathf.Lerp(_rb.velocity.y, FlyVelocity, 0.1f));
-        _anim.SetBool("isFly", true);   
-        
-    }
     
     private void OnEnable()
     {
@@ -46,6 +38,14 @@ public class PlayerController : MonoBehaviour
         ObstacleTrigger.OnPlayerHit -= DiePlayer;
     }
 
+    private void Fly()
+    {
+        if (_die) return;
+        FlyMagicEffect.SetActive(true);
+        _rb.velocity = new Vector2(0, Mathf.Lerp(_rb.velocity.y, FlyVelocity, 0.1f));
+        _anim.SetBool("isFly", true);   
+        
+    }
     private void OnFloor()
     {
         _anim.SetBool("isFly", false);
@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour
         _anim.SetBool("isDie", true);
         _die = true;
     }
-
     
 
 }

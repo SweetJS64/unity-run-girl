@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 namespace UI
 {
     public class MainMenuController : MonoBehaviour
     {
+        public static event Action StartGamePlay;
+        
         [SerializeField] private float SpeedMove = 0.2f;
         
         private Camera _cameraMain;
@@ -41,9 +44,13 @@ namespace UI
         private void CloseMainMenu()
         {
             transform.position = new Vector3(
-                _closePos.x, 
-                Mathf.Lerp(transform.position.y, _closePos.y, SpeedMove * Time.deltaTime), 
-                0);
+                _closePos.x, Mathf.Lerp(transform.position.y, _closePos.y, SpeedMove * Time.deltaTime), 0f);
+            
+            StartGamePlay?.Invoke();
+            if (Mathf.Approximately(transform.position.y, _closePos.y))
+            {
+                
+            }
         }
     }
 }
