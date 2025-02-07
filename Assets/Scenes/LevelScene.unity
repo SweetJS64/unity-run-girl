@@ -6725,6 +6725,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1641028433}
   - component: {fileID: 1641028434}
+  - component: {fileID: 1641028435}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -6763,6 +6764,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641028432}
   m_CullTransparentMesh: 1
+--- !u!114 &1641028435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641028432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2bb715c8acd41d4cb72f702dde22b41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DistanceTracker: {fileID: 627031615}
+  ObstaclesController: {fileID: 1573843694}
 --- !u!1 &1649607044
 GameObject:
   m_ObjectHideFlags: 0
@@ -11833,7 +11848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18d0bec52933f2468717d4ce838bb32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 2
 --- !u!1 &2016949415
 GameObject:
   m_ObjectHideFlags: 0

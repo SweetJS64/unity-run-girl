@@ -47,10 +47,6 @@ namespace UI
                 _closePos.x, Mathf.Lerp(transform.position.y, _closePos.y, SpeedMove * Time.deltaTime), 0f);
             
             StartGamePlay?.Invoke();
-            if (Mathf.Approximately(transform.position.y, _closePos.y))
-            {
-                
-            }
         }
     }
 }

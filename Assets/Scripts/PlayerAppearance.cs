@@ -8,9 +8,14 @@ public class PlayerAppearance : MonoBehaviour
     private Camera _cameraMain;
     private Vector3 _spawnPos;
     private Vector3 _stopPos;
-    private bool _startAnim;
+    private bool _startMove;
     
-    void Start()
+    private void Start()
+    {
+        Init();
+    }
+
+    private void Init()
     {
         _cameraMain = Camera.main;
         if (_cameraMain == null)
@@ -18,37 +23,39 @@ public class PlayerAppearance : MonoBehaviour
             Debug.LogError("_cameraMain == null");
             return;
         }
-        _stopPos = new Vector3(-3.5f, -3.5f, 0);
+        _stopPos = new Vector3(-4f, -3.5f, 0);
         var cameraSize = _cameraMain.ViewportToWorldPoint(new Vector3(0, 0.5f, 0.5f));
-        _spawnPos = new Vector3(cameraSize.x - 3f, _stopPos.y, _stopPos.z);
+        _spawnPos = new Vector3(cameraSize.x - 1f, _stopPos.y, _stopPos.z);
         
         transform.position = _spawnPos;
-    }
+    } 
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (_startAnim) MovePlayer();
+        if (_startMove) MovePlayer();
     }
     
     private void OnEnable()
     {
-        MainMenuController.StartGamePlay += StartPlayer;
+        MainMenuController.StartGamePlay += StartMove;
     }
 
     private void OnDisable()
     {
-        MainMenuController.StartGamePlay -= StartPlayer;
+        MainMenuController.StartGamePlay -= StartMove;
     }
 
     private void MovePlayer()
     {
-        if (transform.position.x >= _stopPos.x) return;
-        var offset = new Vector3(Speed * Time.deltaTime, 0, 0);
-        transform.position += offset;
+        if ((int)transform.position.x >= _stopPos.x) _startMove = false;
+        var offset = new Vector3(
+            Mathf.Lerp(transform.position.x, _stopPos.x, 0.01f), 
+            transform.position.y, 
+            0f);
+        transform.position = offset;
     }
-    private void StartPlayer()
+    private void StartMove()
     {
-        _startAnim = true;
+        _startMove = true;
     }
 }
