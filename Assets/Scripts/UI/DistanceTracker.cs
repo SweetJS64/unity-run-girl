@@ -15,6 +15,7 @@ public class DistanceTracker : MonoBehaviour
     private bool _stopTracker;
 
     public static event Action<float>  GameSpeedUp;
+    public static event Action<int>  CheckBestDistance;
     
     private void Awake()
     {
@@ -63,5 +64,6 @@ public class DistanceTracker : MonoBehaviour
     private void StopTracker()
     {
         _stopTracker = true;
+        CheckBestDistance?.Invoke((int)_distanceTravelled);
     }
 }
