@@ -47,6 +47,7 @@ public class ObstacleMover : MonoBehaviour, IScrollingObject
         }
         _spawnPos = _cameraMain.ViewportToWorldPoint(new Vector3(1, 0.5f, 0)) + new Vector3(_widthSprite, 0, 0)/2;
         _stopPos = -_spawnPos;
+        _speedBoost = _obstaclesController.SpeedBoost;
     }
 
     public void UpdateScrolling()
@@ -56,7 +57,6 @@ public class ObstacleMover : MonoBehaviour, IScrollingObject
             gameObject.SetActive(false);
             return;
         }
-        _speedBoost = _obstaclesController.SpeedBoost;
         var offset = new Vector3(
             TransformMove * _speedBoost * Time.deltaTime, 
             transform.position.y, 

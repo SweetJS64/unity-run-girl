@@ -12,6 +12,7 @@ public class DistanceTracker : MonoBehaviour
     private Text _distanceText;
     private float _distanceTravelled;
     private float _speedBoost = 1f;
+    private bool _stopTracker;
 
     public static event Action<float>  GameSpeedUp;
     
@@ -25,13 +26,24 @@ public class DistanceTracker : MonoBehaviour
         UpdateDistance();
     }
 
-    void Init()
+    private void Init()
     {
         _distanceText = GetComponent<Text>();
     }
 
-private void UpdateDistance()
+    
+    private void OnEnable()
     {
+        ObstacleTrigger.OnPlayerHit += StopTracker;
+    }
+
+    private void OnDisable()
+    {
+        ObstacleTrigger.OnPlayerHit -= StopTracker;
+    }
+    private void UpdateDistance()
+    {
+        if (_stopTracker) return;
         _distanceTravelled += Speed * _speedBoost * Time.deltaTime;
         _distanceText.text = $"{(int)_distanceTravelled} M.";
 
@@ -46,5 +58,10 @@ private void UpdateDistance()
         _speedBoost += SpeedBoostStep;
         GameSpeedUp?.Invoke(SpeedBoostStep);
         //Debug.Log("SpeedUp");
+    }
+
+    private void StopTracker()
+    {
+        _stopTracker = true;
     }
 }

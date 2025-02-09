@@ -7,6 +7,6 @@ public class ObstacleTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //if (other.CompareTag("Player")) OnPlayerHit?.Invoke();
+        if (other.CompareTag("Player")) OnPlayerHit?.Invoke();
     }
 }

@@ -10,7 +10,6 @@ namespace UI
         [SerializeField] private float SpeedMove = 0.2f;
         
         private Camera _cameraMain;
-        private Vector3 _startPos = Vector3.zero;
         private Vector3 _closePos;
         private bool _menuDisable;
         
