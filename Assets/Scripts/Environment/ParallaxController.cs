@@ -69,6 +69,5 @@ public class ParallaxController : MonoBehaviour, IScrollingObject
     private void SpeedUp(float boost)
     {
         _speedBoost += boost;
-        //Debug.Log($"SpeedUpParallax: {_speedBoost}");
     }
 }

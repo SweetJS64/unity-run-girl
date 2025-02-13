@@ -21,9 +21,6 @@ public class ObstaclesController : MonoBehaviour
     private Transform[] _obstaclesObjects;
 
     public float SpeedBoost { get; private set; } = 1f;
-    //private float _lerpSpeedBoost;
-    //private float _lerpStepBoost;
-
     private void Awake()
     {
         InstantiatePrefabs();
@@ -38,7 +35,6 @@ public class ObstaclesController : MonoBehaviour
         if (_stopSpawn) return;
         Timer();
         Spawn();
-        //LerpSpeedUp();
     }
 
     private void InstantiatePrefabs()
@@ -96,11 +92,18 @@ public class ObstaclesController : MonoBehaviour
     private void OnEnable()
     {
         ObstacleTrigger.OnPlayerHit += StopSpawn;
+        DistanceTracker.GameSpeedUp += SpeedUp;
     }
 
     private void OnDisable()
     {
         ObstacleTrigger.OnPlayerHit -= StopSpawn;
+        DistanceTracker.GameSpeedUp -= SpeedUp;
+    }
+    
+    private void SpeedUp(float boost)
+    {
+        SpeedBoost += boost;
     }
 
     private void StopSpawn()

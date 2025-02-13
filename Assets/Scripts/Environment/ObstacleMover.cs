@@ -25,14 +25,12 @@ public class ObstacleMover : MonoBehaviour, IScrollingObject
     private void OnEnable()
     {
         ObstacleTrigger.OnPlayerHit += StopScrolling;
-        DistanceTracker.GameSpeedUp += SpeedUp;
         transform.position = _spawnPos;
     }
 
     private void OnDisable()
     {
         ObstacleTrigger.OnPlayerHit -= StopScrolling;
-        DistanceTracker.GameSpeedUp -= SpeedUp;
     }
 
     private void Init()
@@ -60,15 +58,10 @@ public class ObstacleMover : MonoBehaviour, IScrollingObject
             return;
         }
         var offset = new Vector3(
-            TransformMove * _speedBoost * Time.deltaTime, 
+            TransformMove * _obstaclesController.SpeedBoost * Time.deltaTime, 
             transform.position.y, 
             transform.position.z);
         transform.position -= offset;
-    }
-
-    private void SpeedUp(float boost)
-    {
-        _speedBoost += boost;
     }
     
     public void StopScrolling()

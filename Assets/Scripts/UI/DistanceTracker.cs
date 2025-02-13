@@ -4,13 +4,13 @@ using UnityEngine.UI;
 
 public class DistanceTracker : MonoBehaviour
 {
-    //[SerializeField] private Text distanceText;
     [SerializeField] private float Speed = 7f; 
     [SerializeField] private float SpeedBoostStep = 0.1f; 
-    [SerializeField] private int DistanceForBoost = 100;
+    [SerializeField] private int DistanceStep = 50;
     
     private Text _distanceText;
     private float _distanceTravelled;
+    private int _lastDistanceForStep;
     private float _speedBoost = 1f;
     private bool _stopTracker;
 
@@ -47,10 +47,13 @@ public class DistanceTracker : MonoBehaviour
         if (_stopTracker) return;
         _distanceTravelled += Speed * _speedBoost * Time.deltaTime;
         _distanceText.text = $"{(int)_distanceTravelled} M.";
-
-        if ((int)_distanceTravelled % DistanceForBoost == 0 && _distanceTravelled >= DistanceForBoost)
+        
+        var distanceForStep = (int)(_distanceTravelled / DistanceStep) * DistanceStep;
+        
+        if (distanceForStep > _lastDistanceForStep)
         {
             SpeedUp();
+            _lastDistanceForStep = distanceForStep;
         }
     }
 
@@ -58,7 +61,6 @@ public class DistanceTracker : MonoBehaviour
     {
         _speedBoost += SpeedBoostStep;
         GameSpeedUp?.Invoke(SpeedBoostStep);
-        //Debug.Log("SpeedUp");
     }
 
     private void StopTracker()
