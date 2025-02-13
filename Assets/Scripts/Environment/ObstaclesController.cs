@@ -41,15 +41,6 @@ public class ObstaclesController : MonoBehaviour
         //LerpSpeedUp();
     }
 
-    /*private void LerpSpeedUp()
-    //ты все сломал, лох.
-    {
-        while (SpeedBoost != _lerpSpeedBoost)
-        {
-            SpeedBoost = Mathf.Lerp(SpeedBoost, _lerpSpeedBoost, _lerpStepBoost/10);
-        }
-    }*/
-
     private void InstantiatePrefabs()
     {
         _obstaclesObjects = new Transform[ObstaclePrefabs.Length];
@@ -97,7 +88,7 @@ public class ObstaclesController : MonoBehaviour
 
     private void NextObstacle()
     {
-        _nextObstacle = Random.Range(0, _obstaclesObjects.Length - 1);
+        _nextObstacle = Random.Range(0, _obstaclesObjects.Length);
         if (_obstaclesObjects.Length <= 3) return;
         if (_nextObstacle == _lastObstacle || _nextObstacle == _penultimateObstacle) NextObstacle();
     }
@@ -105,22 +96,15 @@ public class ObstaclesController : MonoBehaviour
     private void OnEnable()
     {
         ObstacleTrigger.OnPlayerHit += StopSpawn;
-        DistanceTracker.GameSpeedUp += SpeedUp;
     }
 
     private void OnDisable()
     {
         ObstacleTrigger.OnPlayerHit -= StopSpawn;
-        DistanceTracker.GameSpeedUp -= SpeedUp;
     }
 
     private void StopSpawn()
     {
-        _stopSpawn = true;
-    }
-    
-    private void SpeedUp(float boost)
-    {
-        SpeedBoost += boost;
+        _stopSpawn = true; 
     }
 }

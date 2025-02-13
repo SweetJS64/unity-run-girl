@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerAppearance : MonoBehaviour
 {
-    [SerializeField]private float Speed = 4f;
+    //[SerializeField]private float Speed = 4f;
     
     private Camera _cameraMain;
     private Vector3 _spawnPos;
