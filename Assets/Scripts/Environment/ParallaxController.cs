@@ -8,7 +8,7 @@ public class ParallaxController : MonoBehaviour, IScrollingObject
 
     private MeshRenderer[] _meshRenderersArray;
     private float _speedBoost = 1f;
-    private bool _isSmoothStop;
+    private bool _needStopping;
     
     private void Start()
     {
@@ -18,7 +18,7 @@ public class ParallaxController : MonoBehaviour, IScrollingObject
     private void Update()
     {
         UpdateScrolling();
-        if (_isSmoothStop) StopScrolling();
+        if (_needStopping) StopScrolling();
     }
 
     private void Init()
@@ -62,7 +62,7 @@ public class ParallaxController : MonoBehaviour, IScrollingObject
 
     public void StopScrolling()
     {
-        _isSmoothStop = true;
+        _needStopping = true;
         _speedBoost = Mathf.Lerp(_speedBoost, 0, 0.1f);
     }
     

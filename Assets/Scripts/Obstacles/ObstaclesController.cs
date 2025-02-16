@@ -18,7 +18,7 @@ public class ObstaclesController : MonoBehaviour
     
     private bool _stopSpawn;
     
-    private Transform[] _obstaclesObjects;
+    private GameObject[] _obstaclesObjects;
 
     public float SpeedBoost { get; private set; } = 1f;
     private void Awake()
@@ -39,22 +39,22 @@ public class ObstaclesController : MonoBehaviour
 
     private void InstantiatePrefabs()
     {
-        _obstaclesObjects = new Transform[ObstaclePrefabs.Length];
+        _obstaclesObjects = new GameObject[ObstaclePrefabs.Length];
         for (int i = 0; i < ObstaclePrefabs.Length; i++)
         {
             _obstaclesObjects[i] = Instantiate(
                     ObstaclePrefabs[i], 
                     Vector3.zero, 
                     Quaternion.identity, 
-                    transform).GetComponent<Transform>();
-            _obstaclesObjects[i].gameObject.SetActive(false);
+                    transform);
+            _obstaclesObjects[i].SetActive(false);
         }
     }
 
     private void Init()
     {
         _spawnInterval = MinSpawnInterval;
-        _nextObstacle = Random.Range(0, _obstaclesObjects.Length - 1);
+        _nextObstacle = Random.Range(0, _obstaclesObjects.Length);
         _lastObstacle = _penultimateObstacle = _nextObstacle;
     }
     
@@ -66,12 +66,12 @@ public class ObstaclesController : MonoBehaviour
     private void Spawn()
     {
         if (_spawnTimer < _spawnInterval) return;
-        if (_obstaclesObjects[_nextObstacle].gameObject.activeInHierarchy)
+        if (_obstaclesObjects[_nextObstacle].activeInHierarchy)
         {
             NextObstacle();
             return;
         }
-        _obstaclesObjects[_nextObstacle].gameObject.SetActive(true);
+        _obstaclesObjects[_nextObstacle].SetActive(true);
         
         _spawnTimer = 0;
         _spawnInterval = Random.Range(MinSpawnInterval, MaxSpawnInterval);
