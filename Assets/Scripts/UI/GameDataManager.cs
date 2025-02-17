@@ -3,8 +3,7 @@ using UnityEngine;
 public class GameDataManager : MonoBehaviour
 {
     private const string BestDistanceKey = "BestDistance";
-
-    // Получить сохранённый лучший результат
+    
     public static float GetBestDistance()
     {
         return PlayerPrefs.GetInt(BestDistanceKey, 0);
