@@ -5,7 +5,7 @@ public class GamePlayUI : MonoBehaviour
 {
     [SerializeField] private GameObject DistanceTracker;
     [SerializeField] private GameObject ObstaclesController;
-    // Start is called before the first frame update
+    
     private void OnEnable()
     {
         MainMenuController.StartGamePlay += EnableTracker;

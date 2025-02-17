@@ -6,11 +6,11 @@ public class DistanceTracker : MonoBehaviour
 {
     [SerializeField] private float Speed = 7f; 
     [SerializeField] private float SpeedBoostStep = 0.1f; 
-    [SerializeField] private int DistanceStep = 50;
+    [SerializeField] private float DistanceStep = 50f;
     
     private Text _distanceText;
     private float _distanceTravelled;
-    private int _lastDistanceForStep;
+    private float _lastDistanceForStep;
     private float _speedBoost = 1f;
     private bool _stopTracker;
 
@@ -54,6 +54,7 @@ public class DistanceTracker : MonoBehaviour
         {
             SpeedUp();
             _lastDistanceForStep = distanceForStep;
+            DistanceStep *= 1.1f;
         }
     }
 

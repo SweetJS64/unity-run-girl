@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LaserGeneratorAppearance : MonoBehaviour
@@ -10,36 +8,27 @@ public class LaserGeneratorAppearance : MonoBehaviour
     private float _stopPosX;
     private bool _rightSide;
     private int _direction;
+    private float _borderX;
     
     void Awake()
     {
         _bordersData = GetComponentInParent<BordersData>();
-        if (_bordersData == null) Debug.LogError("BordersData is null");
         _widthSprite = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
     private void OnEnable()
     {
         _rightSide = transform.localScale.z > 0;
-        Debug.Log($"Name{gameObject.name} rightSide:{_rightSide}");
-        //_direction = _rightSide ? -1 : 1;
-        if (_rightSide)
-        {
-            _startPosX = _bordersData.MaxX + _widthSprite;
-            _stopPosX = _bordersData.MaxX - _widthSprite;
-        }
-        else
-        {
-            _startPosX = _bordersData.MinX - _widthSprite;
-            _stopPosX = _bordersData.MinX + _widthSprite;
-        }
+        _direction = _rightSide ? -1 : 1;
+        _borderX = _rightSide ? _bordersData.MaxX : _bordersData.MinX;
+        _startPosX = _borderX - _widthSprite * _direction;
+        _stopPosX = _borderX + _widthSprite * _direction;
         transform.position = new Vector3(_startPosX, transform.position.y, transform.position.z);
     }
     void Update()
     {
-        var direction = _rightSide ? -1 : 1;
         var offset = new Vector3(
-            Mathf.Lerp(transform.position.x, _stopPosX, 0.01f), 
+            Mathf.Lerp(transform.position.x, _stopPosX, 0.05f), 
             transform.position.y, 
             0f);
         transform.position = offset;
