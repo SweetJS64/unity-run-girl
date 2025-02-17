@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Obstacle
+  m_Name: LaserGenerator
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -59,7 +59,7 @@ AnimationClip:
     - time: 1.5
       value: {fileID: -503710669, guid: 79c66675988df1c4ea3522f82bd2bbc0, type: 3}
     - time: 1.5833334
-      value: {fileID: 1841349920, guid: 79c66675988df1c4ea3522f82bd2bbc0, type: 3}
+      value: {fileID: -503710669, guid: 79c66675988df1c4ea3522f82bd2bbc0, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -101,7 +101,7 @@ AnimationClip:
     - {fileID: -1795833034, guid: 79c66675988df1c4ea3522f82bd2bbc0, type: 3}
     - {fileID: -1019270915, guid: 79c66675988df1c4ea3522f82bd2bbc0, type: 3}
     - {fileID: -503710669, guid: 79c66675988df1c4ea3522f82bd2bbc0, type: 3}
-    - {fileID: 1841349920, guid: 79c66675988df1c4ea3522f82bd2bbc0, type: 3}
+    - {fileID: -503710669, guid: 79c66675988df1c4ea3522f82bd2bbc0, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

@@ -45,12 +45,12 @@ public class PlayerAppearance : MonoBehaviour
 
     private void MovePlayer()
     {
-        if ((int)transform.position.x >= _stopPos.x) _startMove = false;
         var offset = new Vector3(
             Mathf.Lerp(transform.position.x, _stopPos.x, 0.01f), 
             transform.position.y, 
             0f);
         transform.position = offset;
+        if ((int)transform.position.x >= _stopPos.x) _startMove = false;
     }
     private void StartMove()
     {

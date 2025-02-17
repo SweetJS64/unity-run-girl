@@ -26,7 +26,7 @@ public class ObstacleRandomConfig : MonoBehaviour
     private void OnEnable()
     {
         SetScaleY();
-        SetPositionY();
+        SetPosition();
         SetRotation();
         SetSprite();
     }
@@ -46,10 +46,10 @@ public class ObstacleRandomConfig : MonoBehaviour
         transform.localScale = _scale;
     }
 
-    private void SetPositionY()
+    private void SetPosition()
     {
-        var minY = _minPosY - _hightSprite / 2;
-        var maxY = _maxPosY + _hightSprite / 2;
+        var minY = _minPosY + _hightSprite / 2;
+        var maxY = _maxPosY - _hightSprite / 2;
         _position.x = _bordersData.MaxX + _hightSprite / 2;
         _position.y = Random.Range(minY, maxY);
         transform.position = _position;

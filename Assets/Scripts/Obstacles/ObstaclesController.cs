@@ -7,7 +7,6 @@ public class ObstaclesController : MonoBehaviour
     [SerializeField] private float MinSpawnInterval = 2f;
     
     [SerializeField] private GameObject[] ObstaclePrefabs;
-
     
     private float _spawnInterval;
     private float _spawnTimer;
@@ -24,10 +23,11 @@ public class ObstaclesController : MonoBehaviour
     private void Awake()
     {
         InstantiatePrefabs();
+        Init();
     }
     private void Start()
     {
-        Init();
+        
     }
 
     private void Update()
@@ -37,6 +37,13 @@ public class ObstaclesController : MonoBehaviour
         Spawn();
     }
 
+    private void Init()
+    {
+        _spawnInterval = MinSpawnInterval;
+        _nextObstacle = Random.Range(0, _obstaclesObjects.Length);
+        _lastObstacle = _penultimateObstacle = _nextObstacle;
+    }
+    
     private void InstantiatePrefabs()
     {
         _obstaclesObjects = new GameObject[ObstaclePrefabs.Length];
@@ -49,13 +56,6 @@ public class ObstaclesController : MonoBehaviour
                     transform);
             _obstaclesObjects[i].SetActive(false);
         }
-    }
-
-    private void Init()
-    {
-        _spawnInterval = MinSpawnInterval;
-        _nextObstacle = Random.Range(0, _obstaclesObjects.Length);
-        _lastObstacle = _penultimateObstacle = _nextObstacle;
     }
     
     private void Timer()
