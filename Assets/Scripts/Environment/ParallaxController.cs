@@ -4,7 +4,6 @@ public class ParallaxController : MonoBehaviour, IScrollingObject
 {
     [SerializeField] private Material ParallaxMaterialTemplate;
     [SerializeField] private LayerBackground[] LayerConfigs;
-    [SerializeField] private float ParallaxSpeed;
 
     private MeshRenderer[] _meshRenderersArray;
     private float _speedBoost = 1f;
