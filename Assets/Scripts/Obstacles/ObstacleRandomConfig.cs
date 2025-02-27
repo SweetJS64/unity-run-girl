@@ -7,7 +7,6 @@ public class ObstacleRandomConfig : MonoBehaviour
     [SerializeField] private float ScaleMaxY = 2.8f;
     private Vector3 _scale;
     
-    private BordersData _bordersData;
     private Vector3 _topBorder;
     private Vector3 _position;
     private float _hightSprite;
@@ -33,11 +32,10 @@ public class ObstacleRandomConfig : MonoBehaviour
 
     private void Init()
     {
-        _bordersData = GetComponentInParent<BordersData>();
         _hightSprite = GetComponent<SpriteRenderer>().bounds.size.y;
         _scale = transform.localScale;
-        _maxPosY = _bordersData.MaxY;
-        _minPosY = _bordersData.MinY;
+        _maxPosY = BordersDataSingleton.Instance.MaxY;
+        _minPosY = BordersDataSingleton.Instance.MinY;
     }
 
     private void SetScaleY()
@@ -50,7 +48,7 @@ public class ObstacleRandomConfig : MonoBehaviour
     {
         var minY = _minPosY + _hightSprite / 2;
         var maxY = _maxPosY - _hightSprite / 2;
-        _position.x = _bordersData.MaxX + _hightSprite / 2;
+        _position.x = BordersDataSingleton.Instance.MaxX + _hightSprite / 2;
         _position.y = Random.Range(minY, maxY);
         transform.position = _position;
     }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0c3ad314994a7649925aad226a84c45, type: 3}
-  m_Name: Layer0
+  m_Name: c_mLayer0
   m_EditorClassIdentifier: 
   SpriteTexture: {fileID: 21300000, guid: ab01f61b3c6a46c4587ab9734c601f5a, type: 3}
   Speed: 0

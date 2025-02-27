@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class LaserGeneratorAppearance : MonoBehaviour
 {
-    private BordersData _bordersData;
     private float _widthSprite;
     private float _startPosX;
     private float _stopPosX;
@@ -12,7 +11,6 @@ public class LaserGeneratorAppearance : MonoBehaviour
     
     void Awake()
     {
-        _bordersData = GetComponentInParent<BordersData>();
         _widthSprite = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
@@ -20,7 +18,7 @@ public class LaserGeneratorAppearance : MonoBehaviour
     {
         _rightSide = transform.localScale.z > 0;
         _direction = _rightSide ? -1 : 1;
-        _borderX = _rightSide ? _bordersData.MaxX : _bordersData.MinX;
+        _borderX = _rightSide ? BordersDataSingleton.Instance.MaxX : BordersDataSingleton.Instance.MinX;
         _startPosX = _borderX - _widthSprite * _direction;
         _stopPosX = _borderX + _widthSprite * _direction;
         transform.position = new Vector3(_startPosX, transform.position.y, transform.position.z);
