@@ -7456,7 +7456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2053518115102101880, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2053518115102101880, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
       propertyPath: m_TagString
@@ -7917,14 +7917,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14fe99e9dd3898d47a5bfd7b5e48623b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSpawnInterval: 3
-  MinSpawnInterval: 2
-  ObstaclePrefabs:
-  - {fileID: 6880163272557916529, guid: 27f633fef2ef35d4ba3b84e580d69ff4, type: 3}
-  - {fileID: 6880163272557916529, guid: 27f633fef2ef35d4ba3b84e580d69ff4, type: 3}
-  - {fileID: 6880163272557916529, guid: 27f633fef2ef35d4ba3b84e580d69ff4, type: 3}
-  - {fileID: 6880163272557916529, guid: 27f633fef2ef35d4ba3b84e580d69ff4, type: 3}
-  - {fileID: 6246440690917644627, guid: e3afa699ee0c1e94da29e536f51c4253, type: 3}
+  MaxGlobalSpawnInterval: 4
+  MinGlobalSpawnInterval: 2
+  ObstacleRegularPrefab: {fileID: 6880163272557916529, guid: 27f633fef2ef35d4ba3b84e580d69ff4, type: 3}
+  ObstacleLaserPrefab: {fileID: 6971632627682156562, guid: 522e884aa5054c647b5410413a51f530, type: 3}
+  MinLaserSpawnInterval: 15
+  ObstacleRotatePrefab: {fileID: 6246440690917644627, guid: e3afa699ee0c1e94da29e536f51c4253, type: 3}
+  MinRotateSpawnInterval: 3
 --- !u!1 &1641028432
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,98 +1,133 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class ObstaclesController : MonoBehaviour
 {
-    [SerializeField] private float MaxSpawnInterval = 4f;
-    [SerializeField] private float MinSpawnInterval = 2f;
+    [SerializeField] private float MaxGlobalSpawnInterval = 4f; //THIS Time
+    [SerializeField] private float MinGlobalSpawnInterval = 2f;
     
-    [SerializeField] private GameObject[] ObstaclePrefabs;
+    [SerializeField] private GameObject ObstacleRegularPrefab;
+    private GameObject[] _obstaclesRegularObjects;
+    private int _obstacleRegularLenghtArray = 3;
+    private int _idRegularObstacle;
     
-    private float _spawnInterval;
-    private float _spawnTimer;
+    [SerializeField] private GameObject ObstacleLaserPrefab;
+    [SerializeField] private int MinLaserSpawnInterval = 15; // This spawn counter
+    private int _maxLaserSpawnCount;
+    private int _callNumForLaser;
+    private GameObject[] _obstaclesLaserObjects;
+    private int _obstacleLaserLenghtArray = 2;
     
-    private int _nextObstacle;
-    private int _lastObstacle;
-    private int _penultimateObstacle;
+    [SerializeField] private GameObject ObstacleRotatePrefab;
+    [SerializeField] private int MinRotateSpawnInterval = 3;
+    private int _maxRotateSpawnCount;
+    private int _callNumForRotate;
+    private GameObject _obstacleRotateObject;
+
+    private int _counterForLaser;
+    private int _counterForRotate;
+    
+    //private float _spawnTimer;
+    //private int _nextObstacle;
+    //private int _lastObstacle;
+    //private int _penultimateObstacle;
     
     private bool _stopSpawn;
-    
-    private GameObject[] _obstaclesObjects;
 
     public float SpeedBoost { get; private set; } = 1f;
+    
     private void Awake()
     {
-        InstantiatePrefabs();
+        InstantiateObstacles();
         Init();
-    }
-    private void Start()
-    {
-        
     }
 
     private void Update()
     {
         if (_stopSpawn) return;
-        Timer();
-        Spawn();
     }
 
+    private void InstantiateObstacles()
+    {
+        _obstaclesRegularObjects = InstantiatePrefabsArray(ObstacleRegularPrefab, _obstacleRegularLenghtArray);
+        _obstaclesLaserObjects = InstantiatePrefabsArray(ObstacleLaserPrefab, _obstacleLaserLenghtArray);
+        _obstacleRotateObject = Instantiate(
+            ObstacleRotatePrefab, 
+            Vector3.zero, 
+            Quaternion.identity, 
+            transform);
+        _obstacleRotateObject.SetActive(false);
+    }
+
+    private GameObject[] InstantiatePrefabsArray(GameObject prefab, int count)
+    {
+        var prefabsArray = new GameObject[count];
+        for (int i = 0; i < prefabsArray.Length; i++)
+        {
+            prefabsArray[i] = Instantiate(
+                prefab, 
+                Vector3.zero, 
+                Quaternion.identity, 
+                transform);
+            prefabsArray[i].SetActive(false);
+        }
+        return prefabsArray;
+    }
+    
     private void Init()
     {
-        _spawnInterval = MinSpawnInterval;
-        _nextObstacle = Random.Range(0, _obstaclesObjects.Length);
-        _lastObstacle = _penultimateObstacle = _nextObstacle;
-    }
-    
-    private void InstantiatePrefabs()
-    {
-        _obstaclesObjects = new GameObject[ObstaclePrefabs.Length];
-        for (int i = 0; i < ObstaclePrefabs.Length; i++)
-        {
-            _obstaclesObjects[i] = Instantiate(
-                    ObstaclePrefabs[i], 
-                    Vector3.zero, 
-                    Quaternion.identity, 
-                    transform);
-            _obstaclesObjects[i].SetActive(false);
-        }
-    }
-    
-    private void Timer()
-    {
-        _spawnTimer += Time.deltaTime;
+        _maxLaserSpawnCount = (int)(MinLaserSpawnInterval * 1.5f);
+        _maxRotateSpawnCount = (int)(MinRotateSpawnInterval * 1.5f);
+        _callNumForLaser = Random.Range(MinLaserSpawnInterval, _maxLaserSpawnCount);
+        _callNumForRotate = Random.Range(MinRotateSpawnInterval, _maxRotateSpawnCount);
     }
 
-    private void Spawn()
+    IEnumerator WaitEndSound()
     {
-        if (_spawnTimer < _spawnInterval) return;
-        if (_obstaclesObjects[_nextObstacle].activeInHierarchy)
+        yield return new WaitForSeconds(Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval));
+        EnableNextObstacle();
+    }
+
+    private void EnableNextObstacle()
+    {
+        if (_stopSpawn)
         {
-            NextObstacle();
+            StartCoroutine(WaitEndSound());
             return;
         }
-        _obstaclesObjects[_nextObstacle].SetActive(true);
         
-        _spawnTimer = 0;
-        _spawnInterval = Random.Range(MinSpawnInterval, MaxSpawnInterval);
+        if (_counterForLaser >= _callNumForLaser)
+        {
+            Debug.Log("LaserEnable");
+            _callNumForLaser = Random.Range(MinLaserSpawnInterval, _maxLaserSpawnCount);
+            _counterForLaser = 0;
+            return;
+        }
+
+        if (_counterForRotate >= _callNumForRotate)
+        {
+            _obstacleRotateObject.SetActive(true);
+            _callNumForRotate = Random.Range(MinRotateSpawnInterval, _maxRotateSpawnCount);
+            _counterForRotate = 0;
+            StartCoroutine(WaitEndSound());
+            return;
+        }
         
-        _penultimateObstacle = _lastObstacle;
-        _lastObstacle = _nextObstacle;
-        
-        NextObstacle();
+        _obstaclesRegularObjects[_idRegularObstacle].SetActive(true);
+        _counterForLaser++;
+        _counterForRotate++;
+        StartCoroutine(WaitEndSound());
     }
 
-    private void NextObstacle()
-    {
-        _nextObstacle = Random.Range(0, _obstaclesObjects.Length);
-        if (_obstaclesObjects.Length <= 3) return;
-        if (_nextObstacle == _lastObstacle || _nextObstacle == _penultimateObstacle) NextObstacle();
-    }
     
     private void OnEnable()
     {
         ObstacleTrigger.OnPlayerHit += StopSpawn;
         DistanceTracker.GameSpeedUp += SpeedUp;
+        
+        StartCoroutine(WaitEndSound());
     }
 
     private void OnDisable()
