@@ -3,7 +3,10 @@ guid: 14fe99e9dd3898d47a5bfd7b5e48623b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - ObstacleRegularPrefab: {fileID: 6880163272557916529, guid: 27f633fef2ef35d4ba3b84e580d69ff4, type: 3}
+  - ObstacleLaserPrefab: {fileID: 6971632627682156562, guid: 522e884aa5054c647b5410413a51f530, type: 3}
+  - ObstacleRotatePrefab: {fileID: 6246440690917644627, guid: e3afa699ee0c1e94da29e536f51c4253, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

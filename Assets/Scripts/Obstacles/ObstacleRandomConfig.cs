@@ -9,7 +9,7 @@ public class ObstacleRandomConfig : MonoBehaviour
     
     private Vector3 _topBorder;
     private Vector3 _position;
-    private float _hightSprite;
+    private float _heightSprite;
 
     private static float _minPosY;
     private static float _maxPosY;
@@ -32,7 +32,7 @@ public class ObstacleRandomConfig : MonoBehaviour
 
     private void Init()
     {
-        _hightSprite = GetComponent<SpriteRenderer>().bounds.size.y;
+        _heightSprite = GetComponent<SpriteRenderer>().bounds.size.y;
         _scale = transform.localScale;
         _maxPosY = BordersDataSingleton.Instance.MaxY;
         _minPosY = BordersDataSingleton.Instance.MinY;
@@ -46,9 +46,9 @@ public class ObstacleRandomConfig : MonoBehaviour
 
     private void SetPosition()
     {
-        var minY = _minPosY + _hightSprite / 2;
-        var maxY = _maxPosY - _hightSprite / 2;
-        _position.x = BordersDataSingleton.Instance.MaxX + _hightSprite / 2;
+        var minY = _minPosY + _heightSprite / 2;
+        var maxY = _maxPosY - _heightSprite / 2;
+        _position.x = BordersDataSingleton.Instance.MaxX + _heightSprite / 2;
         _position.y = Random.Range(minY, maxY);
         transform.position = _position;
     }

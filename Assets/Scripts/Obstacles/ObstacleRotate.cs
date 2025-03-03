@@ -20,5 +20,4 @@ public class ObstacleRotate : MonoBehaviour
     {
         _direction = Random.Range(0, 2) * 2 - 1;
     }
-    
 }

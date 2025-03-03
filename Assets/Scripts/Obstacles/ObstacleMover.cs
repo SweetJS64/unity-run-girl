@@ -6,7 +6,7 @@ public class ObstacleMover : MonoBehaviour, IScrollingObject
     
     private ObstaclesController _obstaclesController;
     private bool _needStopping;
-    private float _hightSprite;
+    private float _heightSprite;
     private static float _speedBoost = 1f;
     
     private void Awake()
@@ -32,12 +32,12 @@ public class ObstacleMover : MonoBehaviour, IScrollingObject
     private void Init()
     {
         _obstaclesController = GetComponentInParent<ObstaclesController>();
-        _hightSprite = GetComponent<SpriteRenderer>().bounds.size.y;
+        _heightSprite = GetComponent<SpriteRenderer>().bounds.size.y;
     }
 
     public void UpdateScrolling()
     {
-        var minX = BordersDataSingleton.Instance.MinX - _hightSprite;
+        var minX = BordersDataSingleton.Instance.MinX - _heightSprite;
         if (transform.position.x < minX)
         {
             gameObject.SetActive(false);

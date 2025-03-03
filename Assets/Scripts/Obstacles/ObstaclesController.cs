@@ -1,38 +1,35 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class ObstaclesController : MonoBehaviour
 {
-    [SerializeField] private float MaxGlobalSpawnInterval = 4f; //THIS Time
+    [SerializeField] private float MaxGlobalSpawnInterval = 4f;
     [SerializeField] private float MinGlobalSpawnInterval = 2f;
     
+    [Header("Params for RegularObstacles")]
     [SerializeField] private GameObject ObstacleRegularPrefab;
     private GameObject[] _obstaclesRegularObjects;
     private int _obstacleRegularLenghtArray = 3;
     private int _idRegularObstacle;
     
+    [Header("Params for RotateObstacles")]
+    [SerializeField] private GameObject ObstacleRotatePrefab;
+    [SerializeField] private int MinRotateSpawnCount = 3;
+    private int _maxRotateSpawnCount;
+    private int _callNumForRotate;
+    private GameObject _obstacleRotateObject;
+    
+    [Header("Params for LaserObstacles")]
     [SerializeField] private GameObject ObstacleLaserPrefab;
-    [SerializeField] private int MinLaserSpawnInterval = 15; // This spawn counter
+    [SerializeField] private int MinLaserSpawnCount = 15; 
     private int _maxLaserSpawnCount;
     private int _callNumForLaser;
     private GameObject[] _obstaclesLaserObjects;
     private int _obstacleLaserLenghtArray = 2;
     
-    [SerializeField] private GameObject ObstacleRotatePrefab;
-    [SerializeField] private int MinRotateSpawnInterval = 3;
-    private int _maxRotateSpawnCount;
-    private int _callNumForRotate;
-    private GameObject _obstacleRotateObject;
-
     private int _counterForLaser;
     private int _counterForRotate;
-    
-    //private float _spawnTimer;
-    //private int _nextObstacle;
-    //private int _lastObstacle;
-    //private int _penultimateObstacle;
     
     private bool _stopSpawn;
 
@@ -78,47 +75,58 @@ public class ObstaclesController : MonoBehaviour
     
     private void Init()
     {
-        _maxLaserSpawnCount = (int)(MinLaserSpawnInterval * 1.5f);
-        _maxRotateSpawnCount = (int)(MinRotateSpawnInterval * 1.5f);
-        _callNumForLaser = Random.Range(MinLaserSpawnInterval, _maxLaserSpawnCount);
-        _callNumForRotate = Random.Range(MinRotateSpawnInterval, _maxRotateSpawnCount);
+        _maxLaserSpawnCount = (int)(MinLaserSpawnCount * 1.5f);
+        _maxRotateSpawnCount = (int)(MinRotateSpawnCount * 1.5f);
+        _callNumForLaser = Random.Range(MinLaserSpawnCount, _maxLaserSpawnCount);
+        _callNumForRotate = Random.Range(MinRotateSpawnCount, _maxRotateSpawnCount);
     }
 
-    IEnumerator WaitEndSound()
+    IEnumerator WaitEndSound(float waitTime)
     {
-        yield return new WaitForSeconds(Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval));
+        yield return new WaitForSeconds(waitTime);
         EnableNextObstacle();
     }
 
     private void EnableNextObstacle()
     {
-        if (_stopSpawn)
-        {
-            StartCoroutine(WaitEndSound());
-            return;
-        }
+        if (_stopSpawn) return;
         
         if (_counterForLaser >= _callNumForLaser)
         {
-            Debug.Log("LaserEnable");
-            _callNumForLaser = Random.Range(MinLaserSpawnInterval, _maxLaserSpawnCount);
+            _obstaclesLaserObjects[0].SetActive(true);
+            
+            //TODO:
+            //тут мы включаем префаб. Префаб сам генерит кол-во и позици лазеров
+            //озможно делаем еще одну корутину, которая будет знать время жизни лазера и вызывать дефолтную карутину
+            
+            _callNumForLaser = Random.Range(MinLaserSpawnCount, _maxLaserSpawnCount);
             _counterForLaser = 0;
+            var laserWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval); // + timeLaserLife;
+            StartCoroutine(WaitEndSound(laserWaitTime));
             return;
         }
 
         if (_counterForRotate >= _callNumForRotate)
         {
             _obstacleRotateObject.SetActive(true);
-            _callNumForRotate = Random.Range(MinRotateSpawnInterval, _maxRotateSpawnCount);
+            _callNumForRotate = Random.Range(MinRotateSpawnCount, _maxRotateSpawnCount);
             _counterForRotate = 0;
-            StartCoroutine(WaitEndSound());
+            
+            var rotateWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
+            StartCoroutine(WaitEndSound(rotateWaitTime));
             return;
         }
         
         _obstaclesRegularObjects[_idRegularObstacle].SetActive(true);
+        
+        var arrayPassed = _idRegularObstacle == _obstaclesRegularObjects.Length - 1;
+        _idRegularObstacle = arrayPassed ? 0 : ++_idRegularObstacle;
+        
         _counterForLaser++;
         _counterForRotate++;
-        StartCoroutine(WaitEndSound());
+        
+        var regularWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
+        StartCoroutine(WaitEndSound(regularWaitTime));
     }
 
     
@@ -127,7 +135,8 @@ public class ObstaclesController : MonoBehaviour
         ObstacleTrigger.OnPlayerHit += StopSpawn;
         DistanceTracker.GameSpeedUp += SpeedUp;
         
-        StartCoroutine(WaitEndSound());
+        var regularWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
+        StartCoroutine(WaitEndSound(regularWaitTime));
     }
 
     private void OnDisable()
