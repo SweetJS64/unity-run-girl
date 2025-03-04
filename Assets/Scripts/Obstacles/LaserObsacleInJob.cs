@@ -1,0 +1,47 @@
+using System;
+using System.Collections;
+using UnityEngine;
+
+public class LaserObsacleInJob : MonoBehaviour
+{
+    [SerializeField] private float MoveTime = 2f;
+    [SerializeField] private float LifeTime = 4f;
+
+    [SerializeField] private float ActiveScaleY = 1f;
+    private float _inactiveScaleY;
+    private float _finishScaleY;
+    private bool _isCompleted;
+    
+    public static event Action  LaserEndJob;
+    void Update()
+    {
+        transform.localScale = new Vector3(
+            transform.localScale.x, 
+            Mathf.Lerp(transform.localScale.y, _finishScaleY, 0.1f), 
+            transform.localScale.z);
+    }
+
+    private void OnEnable()
+    {
+        _isCompleted = false;
+        StartCoroutine(WaitPause(MoveTime));
+    }
+
+    IEnumerator WaitPause(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        if (!_isCompleted) SetScaleLaser();
+    }
+
+    private void SetScaleLaser()
+    {
+        _finishScaleY = _finishScaleY == 0 ? ActiveScaleY : _inactiveScaleY;
+        _isCompleted = _finishScaleY == 0;
+        if (_isCompleted)
+        {
+            LaserEndJob?.Invoke();
+            return;
+        }
+        StartCoroutine(WaitPause(LifeTime));
+    }
+}

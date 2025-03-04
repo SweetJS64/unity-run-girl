@@ -7923,7 +7923,7 @@ MonoBehaviour:
   ObstacleRotatePrefab: {fileID: 6246440690917644627, guid: e3afa699ee0c1e94da29e536f51c4253, type: 3}
   MinRotateSpawnCount: 3
   ObstacleLaserPrefab: {fileID: 6971632627682156562, guid: 522e884aa5054c647b5410413a51f530, type: 3}
-  MinLaserSpawnCount: 2
+  MinLaserSpawnCount: 10
 --- !u!1 &1641028432
 GameObject:
   m_ObjectHideFlags: 0

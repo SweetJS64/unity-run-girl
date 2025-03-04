@@ -10,7 +10,6 @@ public class ObstaclesController : MonoBehaviour
     [Header("Params for RegularObstacles")]
     [SerializeField] private GameObject ObstacleRegularPrefab;
     private GameObject[] _obstaclesRegularObjects;
-    private int _obstacleRegularLenghtArray = 3;
     private int _idRegularObstacle;
     
     [Header("Params for RotateObstacles")]
@@ -25,8 +24,7 @@ public class ObstaclesController : MonoBehaviour
     [SerializeField] private int MinLaserSpawnCount = 15; 
     private int _maxLaserSpawnCount;
     private int _callNumForLaser;
-    private GameObject[] _obstaclesLaserObjects;
-    private int _obstacleLaserLenghtArray = 2;
+    private GameObject _obstacleLaserObject;
     
     private int _counterForLaser;
     private int _counterForRotate;
@@ -48,16 +46,15 @@ public class ObstaclesController : MonoBehaviour
 
     private void InstantiateObstacles()
     {
-        _obstaclesRegularObjects = InstantiatePrefabsArray(ObstacleRegularPrefab, _obstacleRegularLenghtArray);
-        _obstaclesLaserObjects = InstantiatePrefabsArray(ObstacleLaserPrefab, _obstacleLaserLenghtArray);
-        _obstacleRotateObject = Instantiate(
-            ObstacleRotatePrefab, 
-            Vector3.zero, 
-            Quaternion.identity, 
-            transform);
+        _obstaclesRegularObjects = InstantiatePrefabsArray(ObstacleRegularPrefab, 2);
+        _obstacleLaserObject = Instantiate(ObstacleLaserPrefab, transform);
+        _obstacleRotateObject = Instantiate(ObstacleRotatePrefab, transform);
+        
+        _obstacleLaserObject.SetActive(false);
         _obstacleRotateObject.SetActive(false);
     }
-
+    
+    //TODO: Delete this block?
     private GameObject[] InstantiatePrefabsArray(GameObject prefab, int count)
     {
         var prefabsArray = new GameObject[count];
@@ -81,9 +78,10 @@ public class ObstaclesController : MonoBehaviour
         _callNumForRotate = Random.Range(MinRotateSpawnCount, _maxRotateSpawnCount);
     }
 
-    IEnumerator WaitEndSound(float waitTime)
+    IEnumerator WaitNextRegularObstacle(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+        if (_obstacleLaserObject.activeSelf) _obstacleLaserObject.SetActive(false);
         EnableNextObstacle();
     }
 
@@ -93,7 +91,7 @@ public class ObstaclesController : MonoBehaviour
         
         if (_counterForLaser >= _callNumForLaser)
         {
-            _obstaclesLaserObjects[0].SetActive(true);
+            _obstacleLaserObject.SetActive(true);
             
             //TODO:
             //тут мы включаем префаб. Префаб сам генерит кол-во и позици лазеров
@@ -101,8 +99,8 @@ public class ObstaclesController : MonoBehaviour
             
             _callNumForLaser = Random.Range(MinLaserSpawnCount, _maxLaserSpawnCount);
             _counterForLaser = 0;
-            var laserWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval); // + timeLaserLife;
-            StartCoroutine(WaitEndSound(laserWaitTime));
+            var laserWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval) + 4f; // + timeLaserLife;
+            StartCoroutine(WaitNextRegularObstacle(laserWaitTime));
             return;
         }
 
@@ -113,7 +111,7 @@ public class ObstaclesController : MonoBehaviour
             _counterForRotate = 0;
             
             var rotateWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
-            StartCoroutine(WaitEndSound(rotateWaitTime));
+            StartCoroutine(WaitNextRegularObstacle(rotateWaitTime));
             return;
         }
         
@@ -126,7 +124,7 @@ public class ObstaclesController : MonoBehaviour
         _counterForRotate++;
         
         var regularWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
-        StartCoroutine(WaitEndSound(regularWaitTime));
+        StartCoroutine(WaitNextRegularObstacle(regularWaitTime));
     }
 
     
@@ -136,7 +134,7 @@ public class ObstaclesController : MonoBehaviour
         DistanceTracker.GameSpeedUp += SpeedUp;
         
         var regularWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
-        StartCoroutine(WaitEndSound(regularWaitTime));
+        StartCoroutine(WaitNextRegularObstacle(regularWaitTime));
     }
 
     private void OnDisable()
@@ -154,4 +152,6 @@ public class ObstaclesController : MonoBehaviour
     {
         _stopSpawn = true; 
     }
+    
+    
 }

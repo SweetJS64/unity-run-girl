@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4872176962931335554}
   - component: {fileID: 8656716895551041462}
   - component: {fileID: 1179204201560091969}
+  - component: {fileID: 4762568906136830463}
   m_Layer: 0
   m_Name: Laser
   m_TagString: 'Obstacle '
@@ -141,6 +142,21 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0030753883, y: 0.006916014}
   m_Size: {x: 1.769165, y: 0.36785495}
   m_Direction: 1
+--- !u!114 &4762568906136830463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53065950248562652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87b34061bc66de45b4ad199f03c23de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartPause: 2
+  LifeTime: 4
+  ActiveScaleY: 1
 --- !u!1 &1655887510817665573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,6 +1241,7 @@ GameObject:
   - component: {fileID: 6971632628377095900}
   - component: {fileID: 6971632628377095971}
   - component: {fileID: 6971632628377095902}
+  - component: {fileID: 6172025820195034425}
   m_Layer: 0
   m_Name: Laser
   m_TagString: 'Obstacle '
@@ -1354,3 +1371,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0030753883, y: 0.006916014}
   m_Size: {x: 1.769165, y: 0.36785495}
   m_Direction: 1
+--- !u!114 &6172025820195034425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6971632628377095970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87b34061bc66de45b4ad199f03c23de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartPause: 2
+  LifeTime: 4
+  ActiveScaleY: 1
