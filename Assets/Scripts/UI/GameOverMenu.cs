@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameOverMenu : MonoBehaviour
@@ -12,5 +10,21 @@ public class GameOverMenu : MonoBehaviour
     private void Update()
     {
         
+    }
+    
+    private void OnEnable()
+    {
+        ObstacleTrigger.OnPlayerHit += EnableMenu;
+    }
+
+    private void OnDisable()
+    {
+        ObstacleTrigger.OnPlayerHit -= EnableMenu;
+    }
+
+    private void EnableMenu()
+    {
+        gameObject.SetActive(true);
+        Debug.Log("VAR");
     }
 }

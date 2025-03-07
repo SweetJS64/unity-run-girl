@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObstacleMover : MonoBehaviour, IScrollingObject
+public class ObstacleMover : MonoBehaviour/*, IScrollingObject*/
 {
     [SerializeField] private float SpeedMove = 3.6f;
     
@@ -15,8 +15,15 @@ public class ObstacleMover : MonoBehaviour, IScrollingObject
     }
     private void Update()
     {
-        UpdateScrolling();
-        if (_needStopping) StopScrolling();
+        if (_needStopping)
+        {
+            StopScrolling();
+        }
+        else
+        {
+            _speedBoost = _obstaclesController.SpeedBoost;
+        }
+        UpdateScrolling(_speedBoost);
     }
     
     private void OnEnable()
@@ -35,7 +42,7 @@ public class ObstacleMover : MonoBehaviour, IScrollingObject
         _heightSprite = GetComponent<SpriteRenderer>().bounds.size.y;
     }
 
-    public void UpdateScrolling()
+    public void UpdateScrolling(float speedBoost)
     {
         var minX = BordersDataSingleton.Instance.MinX - _heightSprite;
         if (transform.position.x < minX)
@@ -44,7 +51,7 @@ public class ObstacleMover : MonoBehaviour, IScrollingObject
             return;
         }
 
-        var offset = new Vector3(SpeedMove * _obstaclesController.SpeedBoost * Time.deltaTime, 0, 0);
+        var offset = new Vector3(SpeedMove * speedBoost * Time.deltaTime, 0, 0);
         transform.position -= offset;
     }
     
