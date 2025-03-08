@@ -27,9 +27,7 @@ public class GamePlayUI : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("Start Game Over");
         GameOverWindow.SetActive(true);
         DistanceTracker.SetActive(false);
-        Debug.Log("Game Over");
     }
 }

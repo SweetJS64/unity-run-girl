@@ -24,6 +24,7 @@ public class LaserObsacleInJob : MonoBehaviour
     private void OnEnable()
     {
         _isCompleted = false;
+        transform.localScale = new Vector3(transform.localScale.x, 0, transform.localScale.z);
         StartCoroutine(WaitPause(MoveTime));
     }
 
