@@ -13,6 +13,7 @@ public class ObstacleMover : MonoBehaviour/*, IScrollingObject*/
     {
         Init();
     }
+    
     private void Update()
     {
         if (_needStopping)
@@ -42,7 +43,7 @@ public class ObstacleMover : MonoBehaviour/*, IScrollingObject*/
         _heightSprite = GetComponent<SpriteRenderer>().bounds.size.y;
     }
 
-    public void UpdateScrolling(float speedBoost)
+    private void UpdateScrolling(float speedBoost)
     {
         var minX = BordersDataSingleton.Instance.MinX - _heightSprite;
         if (transform.position.x < minX)
@@ -55,7 +56,7 @@ public class ObstacleMover : MonoBehaviour/*, IScrollingObject*/
         transform.position -= offset;
     }
     
-    public void StopScrolling()
+    private void StopScrolling()
     {
         _needStopping = true;
         _speedBoost = Mathf.Lerp(_speedBoost, 0, 0.1f);

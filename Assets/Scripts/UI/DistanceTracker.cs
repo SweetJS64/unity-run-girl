@@ -27,12 +27,6 @@ public class DistanceTracker : MonoBehaviour
         UpdateDistance();
     }
 
-    private void Init()
-    {
-        _distanceText = GetComponent<Text>();
-    }
-
-    
     private void OnEnable()
     {
         ObstacleTrigger.OnPlayerHit += StopTracker;
@@ -42,6 +36,12 @@ public class DistanceTracker : MonoBehaviour
     {
         ObstacleTrigger.OnPlayerHit -= StopTracker;
     }
+    
+    private void Init()
+    {
+        _distanceText = GetComponent<Text>();
+    }
+    
     private void UpdateDistance()
     {
         if (_stopTracker) return;
@@ -54,7 +54,7 @@ public class DistanceTracker : MonoBehaviour
         {
             SpeedUp();
             _lastDistanceForStep = distanceForStep;
-            DistanceStep *= 1.1f;
+            DistanceStep *= 1.05f;
         }
     }
 

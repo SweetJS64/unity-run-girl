@@ -15,10 +15,7 @@ public class LaserObsacleInJob : MonoBehaviour
     public static event Action  LaserEndJob;
     void Update()
     {
-        transform.localScale = new Vector3(
-            transform.localScale.x, 
-            Mathf.Lerp(transform.localScale.y, _finishScaleY, 0.1f), 
-            transform.localScale.z);
+        ScaleUpdate();
     }
 
     private void OnEnable()
@@ -28,10 +25,12 @@ public class LaserObsacleInJob : MonoBehaviour
         StartCoroutine(WaitPause(MoveTime));
     }
 
-    IEnumerator WaitPause(float waitTime)
+    private void ScaleUpdate()
     {
-        yield return new WaitForSeconds(waitTime);
-        if (!_isCompleted) SetScaleLaser();
+        transform.localScale = new Vector3(
+            transform.localScale.x, 
+            Mathf.Lerp(transform.localScale.y, _finishScaleY, 0.1f), 
+            transform.localScale.z);
     }
 
     private void SetScaleLaser()
@@ -44,5 +43,11 @@ public class LaserObsacleInJob : MonoBehaviour
             return;
         }
         StartCoroutine(WaitPause(LifeTime));
+    }
+    
+    IEnumerator WaitPause(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        if (!_isCompleted) SetScaleLaser();
     }
 }

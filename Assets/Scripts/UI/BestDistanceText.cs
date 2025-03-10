@@ -12,9 +12,4 @@ public class BestDistanceText : MonoBehaviour
         _text.text = $"BEST SCORE: {distance} M.";
         
     }
-
-    void Update()
-    {
-        
-    }
 }

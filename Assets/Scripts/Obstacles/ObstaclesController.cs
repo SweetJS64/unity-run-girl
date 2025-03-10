@@ -38,10 +38,28 @@ public class ObstaclesController : MonoBehaviour
         InstantiateObstacles();
         Init();
     }
-
-    private void Update()
+    
+    private void OnEnable()
     {
-        if (_stopSpawn) return;
+        ObstacleTrigger.OnPlayerHit += StopSpawn;
+        DistanceTracker.GameSpeedUp += SpeedUp;
+        
+        var regularWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
+        StartCoroutine(WaitNextRegularObstacle(regularWaitTime));
+    }
+
+    private void OnDisable()
+    {
+        ObstacleTrigger.OnPlayerHit -= StopSpawn;
+        DistanceTracker.GameSpeedUp -= SpeedUp;
+    }
+    
+    private void Init()
+    {
+        _maxLaserSpawnCount = (int)(MinLaserSpawnCount * 1.5f);
+        _maxRotateSpawnCount = (int)(MinRotateSpawnCount * 1.5f);
+        _callNumForLaser = Random.Range(MinLaserSpawnCount, _maxLaserSpawnCount);
+        _callNumForRotate = Random.Range(MinRotateSpawnCount, _maxRotateSpawnCount);
     }
 
     private void InstantiateObstacles()
@@ -70,21 +88,6 @@ public class ObstaclesController : MonoBehaviour
         return prefabsArray;
     }
     
-    private void Init()
-    {
-        _maxLaserSpawnCount = (int)(MinLaserSpawnCount * 1.5f);
-        _maxRotateSpawnCount = (int)(MinRotateSpawnCount * 1.5f);
-        _callNumForLaser = Random.Range(MinLaserSpawnCount, _maxLaserSpawnCount);
-        _callNumForRotate = Random.Range(MinRotateSpawnCount, _maxRotateSpawnCount);
-    }
-
-    IEnumerator WaitNextRegularObstacle(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        if (_obstacleLaserObject.activeSelf) _obstacleLaserObject.SetActive(false);
-        EnableNextObstacle();
-    }
-
     private void EnableNextObstacle()
     {
         if (_stopSpawn) return;
@@ -92,14 +95,9 @@ public class ObstaclesController : MonoBehaviour
         if (_counterForLaser >= _callNumForLaser)
         {
             _obstacleLaserObject.SetActive(true);
-            
-            //TODO:
-            //тут мы включаем префаб. Префаб сам генерит кол-во и позици лазеров
-            //озможно делаем еще одну корутину, которая будет знать время жизни лазера и вызывать дефолтную карутину
-            
             _callNumForLaser = Random.Range(MinLaserSpawnCount, _maxLaserSpawnCount);
             _counterForLaser = 0;
-            var laserWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval) + 4f; // + timeLaserLife;
+            var laserWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval) + 4f;
             StartCoroutine(WaitNextRegularObstacle(laserWaitTime));
             return;
         }
@@ -126,22 +124,6 @@ public class ObstaclesController : MonoBehaviour
         var regularWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
         StartCoroutine(WaitNextRegularObstacle(regularWaitTime));
     }
-
-    
-    private void OnEnable()
-    {
-        ObstacleTrigger.OnPlayerHit += StopSpawn;
-        DistanceTracker.GameSpeedUp += SpeedUp;
-        
-        var regularWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
-        StartCoroutine(WaitNextRegularObstacle(regularWaitTime));
-    }
-
-    private void OnDisable()
-    {
-        ObstacleTrigger.OnPlayerHit -= StopSpawn;
-        DistanceTracker.GameSpeedUp -= SpeedUp;
-    }
     
     private void SpeedUp(float boost)
     {
@@ -153,5 +135,10 @@ public class ObstaclesController : MonoBehaviour
         _stopSpawn = true; 
     }
     
-    
+    IEnumerator WaitNextRegularObstacle(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        if (_obstacleLaserObject.activeSelf) _obstacleLaserObject.SetActive(false);
+        EnableNextObstacle();
+    }
 }

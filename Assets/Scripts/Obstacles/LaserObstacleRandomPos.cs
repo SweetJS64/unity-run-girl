@@ -11,16 +11,22 @@ public class LaserObstacleRandomPos : MonoBehaviour
     private float _weightLaser;
     private float _firstPosY;
     private float _secondPosY;
-    void Awake()
+    
+    private void Awake()
     {
-        _minY = BordersDataSingleton.Instance.MinY;
-        _maxY = BordersDataSingleton.Instance.MaxY;
-        _weightLaser = GetComponentInChildren<SpriteRenderer>().sprite.bounds.size.y;
+        Init();
     }
     
     private void OnEnable()
     {
         RandomPosition();
+    }
+
+    private void Init()
+    {
+        _minY = BordersDataSingleton.Instance.MinY;
+        _maxY = BordersDataSingleton.Instance.MaxY;
+        _weightLaser = GetComponentInChildren<SpriteRenderer>().sprite.bounds.size.y;
     }
     
     private void RandomPosition()
@@ -31,19 +37,16 @@ public class LaserObstacleRandomPos : MonoBehaviour
             case 0:
                 _firstPosY = _maxY - _weightLaser / 2;
                 _secondPosY = _minY + _weightLaser / 2;
-                
                 SetPosition(_firstPosY, _secondPosY);
                 break;
             case 1:
                 _firstPosY = _maxY - _weightLaser / 2;
                 _secondPosY = _firstPosY - _weightLaser / 2;
-                
                 SetPosition(_firstPosY, _secondPosY);
                 break;
             case 2:
                 _firstPosY = _minY + _weightLaser / 2;
                 _secondPosY = _firstPosY + _weightLaser / 2; 
-                
                 SetPosition(_firstPosY, _secondPosY);
                 break;
         }

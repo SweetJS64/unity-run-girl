@@ -43,7 +43,9 @@ namespace UI
         private void CloseMainMenu()
         {
             transform.position = new Vector3(
-                _closePos.x, Mathf.Lerp(transform.position.y, _closePos.y, SpeedMove * Time.deltaTime), 0f);
+                _closePos.x, 
+                Mathf.Lerp(transform.position.y, _closePos.y, SpeedMove * Time.deltaTime), 
+                0f);
             
             StartGamePlay?.Invoke();
         }

@@ -10,14 +10,14 @@ public class ObstacleRotate : MonoBehaviour
     {
         RotateObject();
     }
+    
+    private void OnEnable()
+    {
+        _direction = Random.Range(0, 2) * 2 - 1;
+    }
 
     private void RotateObject()
     {
         transform.Rotate(0, 0, RotationSpeed * _direction * Time.deltaTime);
-    }
-
-    private void OnEnable()
-    {
-        _direction = Random.Range(0, 2) * 2 - 1;
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ParallaxController : MonoBehaviour, IScrollingObject
+public class ParallaxController : MonoBehaviour/*, IScrollingObject*/
 {
     [SerializeField] private Material ParallaxMaterialTemplate;
     [SerializeField] private LayerBackground[] LayerConfigs;
@@ -50,7 +50,7 @@ public class ParallaxController : MonoBehaviour, IScrollingObject
         DistanceTracker.GameSpeedUp -= SpeedUp;
     }
     
-    public void UpdateScrolling()
+    private void UpdateScrolling()
     {
         for (var i = 0; i < _meshRenderersArray.Length; i++)
         {
@@ -59,7 +59,7 @@ public class ParallaxController : MonoBehaviour, IScrollingObject
         }
     }
 
-    public void StopScrolling()
+    private void StopScrolling()
     {
         _needStopping = true;
         _speedBoost = Mathf.Lerp(_speedBoost, 0, 0.1f);

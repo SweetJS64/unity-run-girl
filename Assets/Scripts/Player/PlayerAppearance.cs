@@ -6,11 +6,26 @@ public class PlayerAppearance : MonoBehaviour
     private Camera _cameraMain;
     private Vector3 _spawnPos;
     private Vector3 _stopPos;
-    private bool _startMove;
+    private bool _canMove;
     
     private void Start()
     {
         Init();
+    }
+
+    private void Update()
+    {
+        if (_canMove) MovePlayer();
+    }
+    
+    private void OnEnable()
+    {
+        MainMenuController.StartGamePlay += StartMove;
+    }
+
+    private void OnDisable()
+    {
+        MainMenuController.StartGamePlay -= StartMove;
     }
 
     private void Init()
@@ -26,23 +41,8 @@ public class PlayerAppearance : MonoBehaviour
         _spawnPos = new Vector3(cameraSize.x - 1f, _stopPos.y, _stopPos.z);
         
         transform.position = _spawnPos;
-    } 
-
-    private void Update()
-    {
-        if (_startMove) MovePlayer();
     }
     
-    private void OnEnable()
-    {
-        MainMenuController.StartGamePlay += StartMove;
-    }
-
-    private void OnDisable()
-    {
-        MainMenuController.StartGamePlay -= StartMove;
-    }
-
     private void MovePlayer()
     {
         var offset = new Vector3(
@@ -50,10 +50,10 @@ public class PlayerAppearance : MonoBehaviour
             transform.position.y, 
             0f);
         transform.position = offset;
-        if ((int)transform.position.x >= _stopPos.x) _startMove = false;
+        if ((int)transform.position.x >= _stopPos.x) _canMove = false;
     }
     private void StartMove()
     {
-        _startMove = true;
+        _canMove = true;
     }
 }
