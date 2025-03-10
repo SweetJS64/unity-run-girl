@@ -19,7 +19,7 @@ public class GameOverUI : MonoBehaviour
 
     private void SetScores(int currentScore)
     {
-        CurrentScoreText.text = $"YOUR SCORE: {currentScore.ToString()} M.";
+        CurrentScoreText.text = $"SCORE: {currentScore.ToString()} M.";
         var distance = GameDataManager.GetBestDistance();
         BestScoreText.text = $"BEST SCORE: {distance} M.";
     }

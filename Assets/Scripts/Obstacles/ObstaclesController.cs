@@ -44,8 +44,8 @@ public class ObstaclesController : MonoBehaviour
         ObstacleTrigger.OnPlayerHit += StopSpawn;
         DistanceTracker.GameSpeedUp += SpeedUp;
         
-        var regularWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
-        StartCoroutine(WaitNextRegularObstacle(regularWaitTime));
+        var waitToSpawn = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
+        StartCoroutine(WaitNextRegularObstacle(waitToSpawn));
     }
 
     private void OnDisable()
@@ -132,7 +132,7 @@ public class ObstaclesController : MonoBehaviour
 
     private void StopSpawn()
     {
-        _stopSpawn = true; 
+        _stopSpawn = true;
     }
     
     private IEnumerator WaitNextRegularObstacle(float waitTime)

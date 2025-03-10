@@ -57,6 +57,4 @@ public class PlayerController : MonoBehaviour
         _anim.SetBool("isDie", true);
         _die = true;
     }
-    
-
 }
