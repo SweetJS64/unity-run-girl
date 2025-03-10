@@ -135,7 +135,7 @@ public class ObstaclesController : MonoBehaviour
         _stopSpawn = true; 
     }
     
-    IEnumerator WaitNextRegularObstacle(float waitTime)
+    private IEnumerator WaitNextRegularObstacle(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         if (_obstacleLaserObject.activeSelf) _obstacleLaserObject.SetActive(false);

@@ -10,6 +10,5 @@ public class BestDistanceText : MonoBehaviour
         _text = GetComponent<Text>();
         var distance = GameDataManager.GetBestDistance();
         _text.text = $"BEST SCORE: {distance} M.";
-        
     }
 }

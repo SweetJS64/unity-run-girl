@@ -11,12 +11,12 @@ public class GameDataManager : MonoBehaviour
 
     private void OnEnable()
     {
-        DistanceTracker.CheckBestDistance += SaveBestDistance;
+        DistanceTracker.SetScore += SaveBestDistance;
     }
 
     private void OnDisable()
     {
-        DistanceTracker.CheckBestDistance -= SaveBestDistance;
+        DistanceTracker.SetScore -= SaveBestDistance;
     }
     private static void SaveBestDistance(int distance)
     {

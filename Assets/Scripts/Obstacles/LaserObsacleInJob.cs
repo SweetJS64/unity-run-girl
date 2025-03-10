@@ -12,7 +12,7 @@ public class LaserObsacleInJob : MonoBehaviour
     private float _finishScaleY;
     private bool _isCompleted;
     
-    public static event Action  LaserEndJob;
+    public static event Action LaserEndJob;
     void Update()
     {
         ScaleUpdate();
@@ -45,7 +45,7 @@ public class LaserObsacleInJob : MonoBehaviour
         StartCoroutine(WaitPause(LifeTime));
     }
     
-    IEnumerator WaitPause(float waitTime)
+    private IEnumerator WaitPause(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         if (!_isCompleted) SetScaleLaser();
