@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject FlyMagicEffect;
     private Rigidbody2D _rb;
     private Animator _anim;
+    private ParticleSystem[] _particles;
     private bool _die;
     
     private void Start()
@@ -15,14 +16,16 @@ public class PlayerController : MonoBehaviour
     
     private void FixedUpdate()
     {
+        if (_die) return;
         if (Input.GetKey(KeyCode.Space) || Input.touchCount > 0) Fly();
+        if (Input.GetKeyDown(KeyCode.Space))  FlyEffectsPlay();
     }
 
     private void Init()
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        FlyMagicEffect.SetActive(false);
+        _particles = FlyMagicEffect.GetComponentsInChildren<ParticleSystem>();
     }
     
     private void OnEnable()
@@ -39,21 +42,24 @@ public class PlayerController : MonoBehaviour
 
     private void Fly()
     {
-        if (_die) return;
-        FlyMagicEffect.SetActive(true);
         _rb.velocity = new Vector2(0, Mathf.Lerp(_rb.velocity.y, FlyVelocity, 0.1f));
-        _anim.SetBool("isFly", true);   
-        
     }
+
+    private void FlyEffectsPlay()
+    {
+        _anim.SetBool("isFly", true);
+        foreach (var particle in _particles) particle.Play();
+    }
+
     private void OnFloor()
     {
         _anim.SetBool("isFly", false);
-        FlyMagicEffect.SetActive(false);
+        foreach (var particle in _particles) particle.Stop();
     }
 
     private void DiePlayer()
     {
-        FlyMagicEffect.SetActive(false);
+        foreach (var particle in _particles) particle.Stop();
         _anim.SetBool("isDie", true);
         _die = true;
     }

@@ -31,7 +31,7 @@ public class LaserObstacleRandomPos : MonoBehaviour
     
     private void RandomPosition()
     {
-        var caseId = Random.Range(0, 2);
+        var caseId = Random.Range(0, 3);
         switch (caseId)
         {
             case 0:

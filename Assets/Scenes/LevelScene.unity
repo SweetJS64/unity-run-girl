@@ -3122,6 +3122,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 913748737, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 913748737, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649607046, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649607046, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649607046, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
+      propertyPath: ShapeModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2053518115102101880, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3270,7 +3290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1430955327
 Transform:
   m_ObjectHideFlags: 0
@@ -3567,7 +3587,7 @@ MonoBehaviour:
   ObstacleRotatePrefab: {fileID: 6246440690917644627, guid: e3afa699ee0c1e94da29e536f51c4253, type: 3}
   MinRotateSpawnCount: 3
   ObstacleLaserPrefab: {fileID: 6971632627682156562, guid: 522e884aa5054c647b5410413a51f530, type: 3}
-  MinLaserSpawnCount: 6
+  MinLaserSpawnCount: 0
 --- !u!1 &1583296143
 GameObject:
   m_ObjectHideFlags: 0

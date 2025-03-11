@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8656716895551041462}
   - component: {fileID: 1179204201560091969}
   - component: {fileID: 4762568906136830463}
+  - component: {fileID: 1839490998214012140}
   m_Layer: 0
   m_Name: Laser
   m_TagString: 'Obstacle '
@@ -154,9 +155,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87b34061bc66de45b4ad199f03c23de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPause: 2
+  MoveTime: 2
   LifeTime: 4
   ActiveScaleY: 1
+--- !u!114 &1839490998214012140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53065950248562652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a30bb7bcd8c31a47b175de306aa362a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1655887510817665573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,6 +1255,7 @@ GameObject:
   - component: {fileID: 6971632628377095971}
   - component: {fileID: 6971632628377095902}
   - component: {fileID: 6172025820195034425}
+  - component: {fileID: 6734183987359360603}
   m_Layer: 0
   m_Name: Laser
   m_TagString: 'Obstacle '
@@ -1383,6 +1397,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87b34061bc66de45b4ad199f03c23de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPause: 2
+  MoveTime: 2
   LifeTime: 4
   ActiveScaleY: 1
+--- !u!114 &6734183987359360603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6971632628377095970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a30bb7bcd8c31a47b175de306aa362a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
