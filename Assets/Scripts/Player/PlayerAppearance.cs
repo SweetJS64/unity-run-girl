@@ -39,7 +39,7 @@ public class PlayerAppearance : MonoBehaviour
     private void MovePlayer()
     {
         var offset = new Vector3(
-            Mathf.Lerp(transform.position.x, _stopPos.x, 0.01f), 
+            Mathf.Lerp(transform.position.x, _stopPos.x, 1f * Time.deltaTime), 
             transform.position.y, 
             0f);
         transform.position = offset;
