@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class GameDataManager : MonoBehaviour
+public class BestDistanceController : MonoBehaviour
 {
     private const string BestDistanceKey = "BestDistance";
     
-    public static float GetBestDistance()
+    public static int GetBestDistance()
     {
         return PlayerPrefs.GetInt(BestDistanceKey, 0);
     }
@@ -21,11 +21,9 @@ public class GameDataManager : MonoBehaviour
     private static void SaveBestDistance(int distance)
     {
         var currentBest = GetBestDistance();
-        if (distance > currentBest)
-        {
-            PlayerPrefs.SetInt(BestDistanceKey, distance);
-            PlayerPrefs.Save();
-        }
+        if (distance < currentBest) return;
+        PlayerPrefs.SetInt(BestDistanceKey, distance);
+        PlayerPrefs.Save();
     }
     
     

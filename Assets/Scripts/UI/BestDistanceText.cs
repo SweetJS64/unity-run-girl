@@ -8,7 +8,7 @@ public class BestDistanceText : MonoBehaviour
     void Start()
     {
         _text = GetComponent<Text>();
-        var distance = GameDataManager.GetBestDistance();
+        var distance = BestDistanceController.GetBestDistance();
         _text.text = $"BEST SCORE: {distance} M.";
     }
 }
