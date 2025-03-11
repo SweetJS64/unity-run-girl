@@ -133,6 +133,7 @@ public class ObstaclesController : MonoBehaviour
     private void StopSpawn()
     {
         _stopSpawn = true;
+        StopAllCoroutines();
     }
     
     private IEnumerator WaitNextRegularObstacle(float waitTime)

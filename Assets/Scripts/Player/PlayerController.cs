@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_die) return;
         if (Input.GetKey(KeyCode.Space) || Input.touchCount > 0) Fly();
-        if (Input.GetKeyDown(KeyCode.Space))  FlyEffectsPlay();
+        if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0)  FlyEffectsPlay();
     }
 
     private void Init()

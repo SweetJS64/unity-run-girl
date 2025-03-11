@@ -10,7 +10,7 @@ public class PauseController : MonoBehaviour
         
     }
 
-    void ResumeGame()
+    public void ResumeGame()
     {
         Time.timeScale = 1f;
         Debug.Log("Resume");
