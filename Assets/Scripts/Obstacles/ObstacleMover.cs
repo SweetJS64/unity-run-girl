@@ -4,7 +4,7 @@ public class ObstacleMover : MonoBehaviour/*, IScrollingObject*/
 {
     [SerializeField] private float SpeedMove = 3.6f;
     
-    private ObstaclesController _obstaclesController;
+    private ObstaclesManager _obstaclesController;
     private bool _needStopping;
     private float _heightSprite;
     private static float _speedBoost = 1f;
@@ -39,13 +39,13 @@ public class ObstacleMover : MonoBehaviour/*, IScrollingObject*/
 
     private void Init()
     {
-        _obstaclesController = GetComponentInParent<ObstaclesController>();
+        _obstaclesController = GetComponentInParent<ObstaclesManager>();
         _heightSprite = GetComponent<SpriteRenderer>().bounds.size.y;
     }
 
     private void UpdateScrolling(float speedBoost)
     {
-        var minX = BordersDataSingleton.Instance.MinX - _heightSprite;
+        var minX = BordersData.Instance.MinX - _heightSprite;
         if (transform.position.x < minX)
         {
             gameObject.SetActive(false);

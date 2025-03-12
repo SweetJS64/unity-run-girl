@@ -6,6 +6,7 @@ public class GamePlayUI : MonoBehaviour
     [SerializeField] private GameObject DistanceTracker;
     [SerializeField] private GameObject ObstaclesController;
     [SerializeField] private GameObject GameOverWindow;
+    [SerializeField] private GameObject PauseButton;
     
     private void OnEnable()
     {
@@ -23,11 +24,13 @@ public class GamePlayUI : MonoBehaviour
     {
         DistanceTracker.SetActive(true);
         ObstaclesController.SetActive(true);
+        //PauseButton.SetActive(true);
     }
 
     private void GameOver()
     {
         GameOverWindow.SetActive(true);
         DistanceTracker.SetActive(false);
+        PauseButton.SetActive(false);
     }
 }

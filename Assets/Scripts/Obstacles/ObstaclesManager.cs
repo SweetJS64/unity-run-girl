@@ -1,30 +1,25 @@
 using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class ObstaclesController : MonoBehaviour
+public class ObstaclesManager : MonoBehaviour
 {
     [SerializeField] private float MaxGlobalSpawnInterval = 4f;
     [SerializeField] private float MinGlobalSpawnInterval = 2f;
+    [SerializeField] private int MinRotateSpawnCount = 3;
+    [SerializeField] private int MinLaserSpawnCount = 10;
+
+    private ObstaclesSpawner _spawner;
     
-    [Header("Params for RegularObstacles")]
-    [SerializeField] private GameObject ObstacleRegularPrefab;
-    private GameObject[] _obstaclesRegularObjects;
+    private GameObject[] _regularObstacles;
     private int _idRegularObstacle;
     
-    [Header("Params for RotateObstacles")]
-    [SerializeField] private GameObject ObstacleRotatePrefab;
-    [SerializeField] private int MinRotateSpawnCount = 3;
+    private GameObject _rotateObstacle;
     private int _maxRotateSpawnCount;
     private int _callNumForRotate;
-    private GameObject _obstacleRotateObject;
     
-    [Header("Params for LaserObstacles")]
-    [SerializeField] private GameObject ObstacleLaserPrefab;
-    [SerializeField] private int MinLaserSpawnCount = 15; 
+    private GameObject _laserObstacle;
     private int _maxLaserSpawnCount;
     private int _callNumForLaser;
-    private GameObject _obstacleLaserObject;
     
     private int _counterForLaser;
     private int _counterForRotate;
@@ -35,7 +30,6 @@ public class ObstaclesController : MonoBehaviour
     
     private void Awake()
     {
-        InstantiateObstacles();
         Init();
     }
     
@@ -56,36 +50,15 @@ public class ObstaclesController : MonoBehaviour
     
     private void Init()
     {
+        _spawner = GetComponent<ObstaclesSpawner>();
+        _regularObstacles = _spawner.GetRegularObstacles();
+        _rotateObstacle = _spawner.GetRotateObstacle();
+        _laserObstacle = _spawner.GetLaserObstacle();
+        
         _maxLaserSpawnCount = (int)(MinLaserSpawnCount * 1.5f);
         _maxRotateSpawnCount = (int)(MinRotateSpawnCount * 1.5f);
         _callNumForLaser = Random.Range(MinLaserSpawnCount, _maxLaserSpawnCount);
         _callNumForRotate = Random.Range(MinRotateSpawnCount, _maxRotateSpawnCount);
-    }
-
-    private void InstantiateObstacles()
-    {
-        _obstaclesRegularObjects = InstantiatePrefabsArray(ObstacleRegularPrefab, 2);
-        _obstacleLaserObject = Instantiate(ObstacleLaserPrefab, transform);
-        _obstacleRotateObject = Instantiate(ObstacleRotatePrefab, transform);
-        
-        _obstacleLaserObject.SetActive(false);
-        _obstacleRotateObject.SetActive(false);
-    }
-    
-    //TODO: Delete this block?
-    private GameObject[] InstantiatePrefabsArray(GameObject prefab, int count)
-    {
-        var prefabsArray = new GameObject[count];
-        for (int i = 0; i < prefabsArray.Length; i++)
-        {
-            prefabsArray[i] = Instantiate(
-                prefab, 
-                Vector3.zero, 
-                Quaternion.identity, 
-                transform);
-            prefabsArray[i].SetActive(false);
-        }
-        return prefabsArray;
     }
     
     private void EnableNextObstacle()
@@ -94,7 +67,7 @@ public class ObstaclesController : MonoBehaviour
         
         if (_counterForLaser >= _callNumForLaser)
         {
-            _obstacleLaserObject.SetActive(true);
+            _laserObstacle.SetActive(true);
             _callNumForLaser = Random.Range(MinLaserSpawnCount, _maxLaserSpawnCount);
             _counterForLaser = 0;
             var laserWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval) + 4f;
@@ -104,7 +77,7 @@ public class ObstaclesController : MonoBehaviour
 
         if (_counterForRotate >= _callNumForRotate)
         {
-            _obstacleRotateObject.SetActive(true);
+            _rotateObstacle.SetActive(true);
             _callNumForRotate = Random.Range(MinRotateSpawnCount, _maxRotateSpawnCount);
             _counterForRotate = 0;
             
@@ -113,9 +86,9 @@ public class ObstaclesController : MonoBehaviour
             return;
         }
         
-        _obstaclesRegularObjects[_idRegularObstacle].SetActive(true);
+        _regularObstacles[_idRegularObstacle].SetActive(true);
         
-        var arrayPassed = _idRegularObstacle == _obstaclesRegularObjects.Length - 1;
+        var arrayPassed = _idRegularObstacle == _regularObstacles.Length - 1;
         _idRegularObstacle = arrayPassed ? 0 : ++_idRegularObstacle;
         
         _counterForLaser++;
@@ -139,7 +112,7 @@ public class ObstaclesController : MonoBehaviour
     private IEnumerator WaitNextRegularObstacle(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        if (_obstacleLaserObject.activeSelf) _obstacleLaserObject.SetActive(false);
+        if (_laserObstacle.activeSelf) _laserObstacle.SetActive(false);
         EnableNextObstacle();
     }
 }

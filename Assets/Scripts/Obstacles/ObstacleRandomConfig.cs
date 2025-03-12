@@ -34,8 +34,8 @@ public class ObstacleRandomConfig : MonoBehaviour
     {
         _heightSprite = GetComponent<SpriteRenderer>().bounds.size.y;
         _scale = transform.localScale;
-        _maxPosY = BordersDataSingleton.Instance.MaxY;
-        _minPosY = BordersDataSingleton.Instance.MinY;
+        _maxPosY = BordersData.Instance.MaxY;
+        _minPosY = BordersData.Instance.MinY;
     }
 
     private void SetScaleY()
@@ -48,7 +48,7 @@ public class ObstacleRandomConfig : MonoBehaviour
     {
         var minY = _minPosY + _heightSprite / 2;
         var maxY = _maxPosY - _heightSprite / 2;
-        _position.x = BordersDataSingleton.Instance.MaxX + _heightSprite / 2;
+        _position.x = BordersData.Instance.MaxX + _heightSprite / 2;
         _position.y = Random.Range(minY, maxY);
         transform.position = _position;
     }

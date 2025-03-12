@@ -36,7 +36,7 @@ public class LaserGeneratorController : MonoBehaviour
         _widthSprite = GetComponent<SpriteRenderer>().bounds.size.x;
         _rightSide = transform.localScale.z > 0;
         _direction = _rightSide ? -1 : 1;
-        _borderX = _rightSide ? BordersDataSingleton.Instance.MaxX : BordersDataSingleton.Instance.MinX;
+        _borderX = _rightSide ? BordersData.Instance.MaxX : BordersData.Instance.MinX;
         _startPosX = _borderX - _widthSprite * _direction;
         _stopPosX = _borderX + _widthSprite * _direction;
         transform.position = new Vector3(_startPosX, transform.position.y, transform.position.z);

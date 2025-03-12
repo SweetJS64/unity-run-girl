@@ -32,7 +32,7 @@ public class PlayerAppearance : MonoBehaviour
     private void Init()
     {
         _stopPos = new Vector3(-4f, -3.5f, 0);
-        _spawnPos = new Vector3(BordersDataSingleton.Instance.MinX - 1f, _stopPos.y, 0);
+        _spawnPos = new Vector3(BordersData.Instance.MinX - 1f, _stopPos.y, 0);
         transform.position = _spawnPos;
     }
     

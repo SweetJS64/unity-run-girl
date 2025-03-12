@@ -24,8 +24,8 @@ public class LaserObstacleRandomPos : MonoBehaviour
 
     private void Init()
     {
-        _minY = BordersDataSingleton.Instance.MinY;
-        _maxY = BordersDataSingleton.Instance.MaxY;
+        _minY = BordersData.Instance.MinY;
+        _maxY = BordersData.Instance.MaxY;
         _weightLaser = GetComponentInChildren<SpriteRenderer>().sprite.bounds.size.y;
     }
     

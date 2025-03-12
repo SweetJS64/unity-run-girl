@@ -1,8 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class BordersDataSingleton : MonoBehaviour
+public class BordersData : MonoBehaviour
 {
-    public static BordersDataSingleton Instance { get; private set; }
+    public static BordersData Instance { get; private set; }
     
     [SerializeField] private BoxCollider2D BorderBottom;
     public float MaxX { get; private set; }
