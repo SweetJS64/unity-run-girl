@@ -1204,6 +1204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6971632627682156563}
   - component: {fileID: 2472939854618511849}
+  - component: {fileID: -5278087453193994203}
   m_Layer: 0
   m_Name: LaserObstacle
   m_TagString: Untagged
@@ -1242,6 +1243,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLaser: {fileID: 4195785483775427978}
   SecondLaser: {fileID: 8351343643694896291}
+--- !u!114 &-5278087453193994203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6971632627682156562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2091f502d29f0824c9a7ad4888b1e134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6971632628377095970
 GameObject:
   m_ObjectHideFlags: 0
