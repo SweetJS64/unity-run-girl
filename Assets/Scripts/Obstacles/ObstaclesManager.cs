@@ -45,22 +45,25 @@ public class ObstaclesManager : MonoBehaviour
         _rotateObstacle = _spawner.GetRotateObstacle().GetComponent<AbstractObstacle>();
         _rotateObstacle.SetMinSpawnCount(MinRotateSpawnCount);
         _laserObstacle = _spawner.GetLaserObstacle().GetComponent<AbstractObstacle>();
-        _laserObstacle.SetMinSpawnCount(MinRotateSpawnCount);
+        _laserObstacle.SetMinSpawnCount(MinLaserSpawnCount);
     }
     
     private void EnableNextObstacle()
     {
         if (_stopSpawn) return;
 
+        var waitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
+        
         if (_rotateObstacle.ShouldSpawn())
         {
-            EnableAbstractObstacle(_rotateObstacle);
+            EnableAbstractObstacle(_rotateObstacle, waitTime);
             return;
         }
         
         if (_laserObstacle.ShouldSpawn())
         {
-            EnableAbstractObstacle(_laserObstacle);
+            waitTime += 6f;
+            EnableAbstractObstacle(_laserObstacle, waitTime);
             return;
         }
         
@@ -69,17 +72,14 @@ public class ObstaclesManager : MonoBehaviour
         var arrayPassed = _idRegularObstacle == _regularObstacles.Length - 1;
         _idRegularObstacle = arrayPassed ? 0 : ++_idRegularObstacle;
         
-        var regularWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
-        StartCoroutine(WaitNextObstacle(regularWaitTime));
+        StartCoroutine(WaitNextObstacle(waitTime));
     }
 
-    private void EnableAbstractObstacle (AbstractObstacle obstacle)
+    private void EnableAbstractObstacle (AbstractObstacle obstacle, float waitTime)
     {
         obstacle.gameObject.SetActive(true);
-        var rotateWaitTime = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
-        StartCoroutine(WaitNextObstacle(rotateWaitTime));
+        StartCoroutine(WaitNextObstacle(waitTime));
     }
-    
     
     private void SpeedUp(float boost)
     {

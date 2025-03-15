@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (_die) return;
-        if (Input.GetKey(KeyCode.Space) || Input.touchCount > 0) Fly();
         if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0)  FlyEffectsPlay();
+        if (Input.GetKey(KeyCode.Space) || Input.touchCount > 0) Fly();
     }
 
     private void Init()
