@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class LaserGeneratorController : MonoBehaviour
+public class LaserGeneratorMover : MonoBehaviour
 {
     [SerializeField] private float SpeedGenerators;
     [SerializeField] private LaserObsacleInJob Laser;

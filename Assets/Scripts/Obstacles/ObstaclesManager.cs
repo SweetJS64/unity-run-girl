@@ -28,7 +28,7 @@ public class ObstaclesManager : MonoBehaviour
     {
         ObstacleTrigger.OnPlayerHit += StopSpawn;
         DistanceTracker.GameSpeedUp += SpeedUp;
-        LaserGeneratorController.DisableLaserObstacle += EnableNextObstacle;
+        LaserGeneratorMover.DisableLaserObstacle += EnableNextObstacle;
         
         var waitToSpawn = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
         StartCoroutine(WaitNextObstacle(waitToSpawn));
@@ -38,7 +38,7 @@ public class ObstaclesManager : MonoBehaviour
     {
         ObstacleTrigger.OnPlayerHit -= StopSpawn;
         DistanceTracker.GameSpeedUp -= SpeedUp;
-        LaserGeneratorController.DisableLaserObstacle -= EnableNextObstacle;
+        LaserGeneratorMover.DisableLaserObstacle -= EnableNextObstacle;
     }
     
     private void Init()

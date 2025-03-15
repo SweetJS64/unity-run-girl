@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserController : AbstractRareObstacle
+public class LaserObstacleController : AbstractRareObstacle
 {
     private void OnEnable()
     {
-        LaserGeneratorController.DisableLaserObstacle += Disable;
+        LaserGeneratorMover.DisableLaserObstacle += Disable;
     }
 
     private void OnDisable()
     {
-        LaserGeneratorController.DisableLaserObstacle -= Disable;
+        LaserGeneratorMover.DisableLaserObstacle -= Disable;
     }
 
     private void Disable()

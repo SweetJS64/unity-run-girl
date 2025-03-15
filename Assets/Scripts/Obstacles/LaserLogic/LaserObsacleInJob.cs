@@ -22,7 +22,7 @@ public class LaserObsacleInJob : MonoBehaviour
     
     private void OnEnable()
     {
-        LaserGeneratorController.StartLaserJob += StartLaserJob;
+        LaserGeneratorMover.StartLaserJob += StartLaserJob;
         _isScalingDown = false;
         transform.localScale = new Vector3(transform.localScale.x, 0, transform.localScale.z);
         _finishScaleY = ActiveScaleY;
@@ -30,7 +30,7 @@ public class LaserObsacleInJob : MonoBehaviour
 
     private void OnDisable()
     {
-        LaserGeneratorController.StartLaserJob -= StartLaserJob;
+        LaserGeneratorMover.StartLaserJob -= StartLaserJob;
     }
     
     private void StartLaserJob()
