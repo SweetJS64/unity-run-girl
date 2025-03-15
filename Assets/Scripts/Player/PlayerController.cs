@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -14,10 +15,15 @@ public class PlayerController : MonoBehaviour
         Init();
     }
     
-    private void FixedUpdate()
+    private void Update()
     {
         if (_die) return;
         if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0)  FlyEffectsPlay();
+    }
+
+    private void FixedUpdate()
+    {
+        if (_die) return;
         if (Input.GetKey(KeyCode.Space) || Input.touchCount > 0) Fly();
     }
 

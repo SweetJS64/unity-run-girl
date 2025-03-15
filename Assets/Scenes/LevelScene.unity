@@ -3607,10 +3607,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145cec3eba1e3a644a1d44a26085f875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxGlobalSpawnInterval: 4
   MinGlobalSpawnInterval: 2
+  MaxGlobalSpawnInterval: 4
   MinRotateSpawnCount: 3
-  MinLaserSpawnCount: 5
+  MinLaserSpawnCount: 2
 --- !u!114 &1573843697
 MonoBehaviour:
   m_ObjectHideFlags: 0

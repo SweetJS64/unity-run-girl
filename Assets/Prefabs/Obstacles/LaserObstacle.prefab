@@ -304,6 +304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17adec52269d674a96bbacd8fcd76f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpeedGenerators: 0
+  Laser: {fileID: 0}
 --- !u!1 &2430722703852579348
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +440,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17adec52269d674a96bbacd8fcd76f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpeedGenerators: 0
+  Laser: {fileID: 0}
 --- !u!1 &3360079169393984231
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4195785483775427978}
   m_Layer: 0
-  m_Name: FirsLaserObstacle
+  m_Name: FirstLaserObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -816,6 +820,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17adec52269d674a96bbacd8fcd76f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpeedGenerators: 0
+  Laser: {fileID: 0}
 --- !u!1 &5378942833977274981
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,6 +956,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17adec52269d674a96bbacd8fcd76f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpeedGenerators: 0
+  Laser: {fileID: 0}
 --- !u!1 &5379092862572094548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,6 +1213,7 @@ GameObject:
   - component: {fileID: 6971632627682156563}
   - component: {fileID: 2472939854618511849}
   - component: {fileID: -5278087453193994203}
+  - component: {fileID: 6655699814737132240}
   m_Layer: 0
   m_Name: LaserObstacle
   m_TagString: Untagged
@@ -1255,6 +1264,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2091f502d29f0824c9a7ad4888b1e134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6655699814737132240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6971632627682156562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4743ecbec289d6d4b9c9f8ea7a7c25f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftGenerator: {fileID: 0}
+  RightGenerator: {fileID: 0}
+  Laser: {fileID: 0}
 --- !u!1 &6971632628377095970
 GameObject:
   m_ObjectHideFlags: 0
