@@ -155,8 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87b34061bc66de45b4ad199f03c23de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveTime: 2
-  LifeTime: 4
+  LifeTime: 2
   ActiveScaleY: 1
 --- !u!114 &1839490998214012140
 MonoBehaviour:
@@ -1212,7 +1211,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6971632627682156563}
   - component: {fileID: 2472939854618511849}
-  - component: {fileID: -5278087453193994203}
   - component: {fileID: 6655699814737132240}
   m_Layer: 0
   m_Name: LaserObstacle
@@ -1252,18 +1250,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLaser: {fileID: 4195785483775427978}
   SecondLaser: {fileID: 8351343643694896291}
---- !u!114 &-5278087453193994203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6971632627682156562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2091f502d29f0824c9a7ad4888b1e134, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6655699814737132240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1276,9 +1262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4743ecbec289d6d4b9c9f8ea7a7c25f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftGenerator: {fileID: 0}
-  RightGenerator: {fileID: 0}
-  Laser: {fileID: 0}
 --- !u!1 &6971632628377095970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1434,8 +1417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87b34061bc66de45b4ad199f03c23de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveTime: 2
-  LifeTime: 4
+  LifeTime: 2
   ActiveScaleY: 1
 --- !u!114 &6734183987359360603
 MonoBehaviour:

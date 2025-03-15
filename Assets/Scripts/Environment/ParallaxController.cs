@@ -67,6 +67,7 @@ public class ParallaxController : MonoBehaviour/*, IScrollingObject*/
     
     private void SpeedUp(float boost)
     {
+        if(_needStopping) return;
         _speedBoost += boost;
     }
 }

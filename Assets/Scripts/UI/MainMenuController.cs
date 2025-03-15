@@ -12,6 +12,7 @@ namespace UI
         private Camera _cameraMain;
         private Vector3 _closePos;
         private bool _menuDisable;
+        private bool _gameStarted;
         
         private void Start()
         {
@@ -47,7 +48,11 @@ namespace UI
                 Mathf.Lerp(transform.position.y, _closePos.y, SpeedMove * Time.deltaTime), 
                 0f);
             
+            if (Mathf.Abs(_closePos.y - transform.position.y) < 0.1f) gameObject.SetActive(false);
+            
+            if (_gameStarted) return;
             StartGamePlay?.Invoke();
+            _gameStarted = true;
         }
     }
 }

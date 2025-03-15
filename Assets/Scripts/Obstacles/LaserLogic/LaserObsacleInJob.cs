@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class LaserObsacleInJob : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class LaserObsacleInJob : MonoBehaviour
     private float _finishScaleY;
     
     private bool _inJob;
-    private bool _isCompleted;
+    private bool _isScalingDown;
     
     public static event Action LaserEndJob;
+
     private void Update()
     {
         if (_inJob) ScaleUpdate(_finishScaleY);
@@ -21,7 +23,7 @@ public class LaserObsacleInJob : MonoBehaviour
     private void OnEnable()
     {
         LaserGeneratorController.StartLaserJob += StartLaserJob;
-        _isCompleted = false;
+        _isScalingDown = false;
         transform.localScale = new Vector3(transform.localScale.x, 0, transform.localScale.z);
         _finishScaleY = ActiveScaleY;
     }
@@ -43,22 +45,21 @@ public class LaserObsacleInJob : MonoBehaviour
             Mathf.Lerp(transform.localScale.y, finishScaleY, 2.5f * Time.deltaTime), 
             transform.localScale.z);
 
-        var onFinish = Mathf.Abs(transform.localScale.y - finishScaleY) < 0.1f;
+        var onFinish = Mathf.Abs(transform.localScale.y - finishScaleY) < 0.01f;
         
-        if (onFinish && _isCompleted)
+        if (onFinish && _isScalingDown)
         {
-            LaserEndJob.Invoke();
+            LaserEndJob?.Invoke();
             _inJob = false;
             return;
         }
         if (onFinish) StartCoroutine(WaitPause(LifeTime));
     }
     
-    
     private IEnumerator WaitPause(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         _finishScaleY = 0;
-        _isCompleted = true;
+        _isScalingDown = true;
     }
 }

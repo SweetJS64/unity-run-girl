@@ -54,7 +54,7 @@ public class DistanceTracker : MonoBehaviour
         {
             SpeedUp();
             _lastDistanceForStep = distanceForStep;
-            DistanceStep *= 1.2f;
+            DistanceStep *= 1.1f;
         }
     }
 

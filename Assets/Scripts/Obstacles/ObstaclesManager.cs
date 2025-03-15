@@ -9,8 +9,8 @@ public class ObstaclesManager : MonoBehaviour
     [SerializeField] private int MinLaserSpawnCount = 2;
     
     private ObstaclesSpawner _spawner;
-    private AbstractObstacle _rotateObstacle;
-    private AbstractObstacle _laserObstacle;
+    private AbstractRareObstacle _rotateObstacle;
+    private AbstractRareObstacle _laserObstacle;
     
     private GameObject[] _regularObstacles;
     private int _idRegularObstacle;
@@ -28,7 +28,7 @@ public class ObstaclesManager : MonoBehaviour
     {
         ObstacleTrigger.OnPlayerHit += StopSpawn;
         DistanceTracker.GameSpeedUp += SpeedUp;
-        LaserGeneratorController.DisableLaserObstacle += EventForLaser;
+        LaserGeneratorController.DisableLaserObstacle += EnableNextObstacle;
         
         var waitToSpawn = Random.Range(MinGlobalSpawnInterval, MaxGlobalSpawnInterval);
         StartCoroutine(WaitNextObstacle(waitToSpawn));
@@ -38,23 +38,17 @@ public class ObstaclesManager : MonoBehaviour
     {
         ObstacleTrigger.OnPlayerHit -= StopSpawn;
         DistanceTracker.GameSpeedUp -= SpeedUp;
-        LaserGeneratorController.DisableLaserObstacle -= EventForLaser;
+        LaserGeneratorController.DisableLaserObstacle -= EnableNextObstacle;
     }
     
     private void Init()
     {
         _spawner = GetComponent<ObstaclesSpawner>();
         _regularObstacles = _spawner.GetRegularObstacles();
-        _rotateObstacle = _spawner.GetRotateObstacle().GetComponent<AbstractObstacle>();
+        _rotateObstacle = _spawner.GetRotateObstacle().GetComponent<AbstractRareObstacle>();
         _rotateObstacle.SetMinSpawnCount(MinRotateSpawnCount);
-        _laserObstacle = _spawner.GetLaserObstacle().GetComponent<AbstractObstacle>();
+        _laserObstacle = _spawner.GetLaserObstacle().GetComponent<AbstractRareObstacle>();
         _laserObstacle.SetMinSpawnCount(MinLaserSpawnCount);
-    }
-
-    private void EventForLaser()
-    {
-        EnableNextObstacle();
-        Debug.Log("XYZ");
     }
     
     private void EnableNextObstacle()
@@ -89,7 +83,7 @@ public class ObstaclesManager : MonoBehaviour
         StartCoroutine(WaitNextObstacle(waitTime));
     }
     
-    private void EnableAbstractObstacle (AbstractObstacle obstacle, float waitTime)
+    private void EnableAbstractObstacle (AbstractRareObstacle obstacle, float waitTime)
     {
         obstacle.gameObject.SetActive(true);
         StartCoroutine(WaitNextObstacle(waitTime));
@@ -97,6 +91,7 @@ public class ObstaclesManager : MonoBehaviour
     
     private void SpeedUp(float boost)
     {
+        if(_stopSpawn) return;
         SpeedBoost += boost;
     }
 
