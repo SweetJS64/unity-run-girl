@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class AbstractRareObstacle : MonoBehaviour
 {
-    private int _minSpawnCount = 5;
+    private int _minSpawnCount = 5; //TODO: minMax in SO
     private  int _maxSpawnCount;
     private int _currentSpawnCount;
-
+    
     public void SetMinSpawnCount(int value)
     {
         _minSpawnCount = value;

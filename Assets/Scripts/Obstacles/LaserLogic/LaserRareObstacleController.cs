@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class LaserObstacleController : AbstractRareObstacle
+public class LaserRareObstacleController : AbstractRareObstacle
 {
     private void OnEnable()
     {

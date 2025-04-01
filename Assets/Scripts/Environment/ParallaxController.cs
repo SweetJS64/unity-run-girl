@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ParallaxController : MonoBehaviour/*, IScrollingObject*/
+public class ParallaxController : MonoBehaviour
 {
     [SerializeField] private Material ParallaxMaterialTemplate;
     [SerializeField] private LayerBackground[] LayerConfigs;
@@ -35,7 +35,17 @@ public class ParallaxController : MonoBehaviour/*, IScrollingObject*/
             _meshRenderersArray[i].material = ParallaxMaterialTemplate;
             _meshRenderersArray[i].material.mainTexture = LayerConfigs[i].SpriteTexture.texture;
             _meshRenderersArray[i].material.renderQueue = 1000 + i * 10;
+            AdaptQuadToScreen(_meshRenderersArray[i].gameObject);
         }
+    }
+    
+    private void AdaptQuadToScreen(GameObject go)
+    {
+        var cam = Camera.main;
+        var height = 2f * cam.orthographicSize;
+        var width = height * cam.aspect;
+
+        go.transform.localScale = new Vector3(width, height, 1f);
     }
     
     private void OnEnable()
@@ -62,7 +72,7 @@ public class ParallaxController : MonoBehaviour/*, IScrollingObject*/
     private void StopScrolling()
     {
         _needStopping = true;
-        _speedBoost = Mathf.Lerp(_speedBoost, 0, 0.1f);
+        _speedBoost = 0f;
     }
     
     private void SpeedUp(float boost)

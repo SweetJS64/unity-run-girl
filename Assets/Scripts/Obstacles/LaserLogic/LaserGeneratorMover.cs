@@ -70,7 +70,7 @@ public class LaserGeneratorMover : MonoBehaviour
         _borderX = _rightSide ? BordersData.Instance.MaxX : BordersData.Instance.MinX;
         
         _startPosX = _borderX - _widthSprite * _direction;
-        _stopPosX = _borderX + _widthSprite * _direction;
+        _stopPosX = _borderX + _widthSprite / 2 * _direction;
         
         transform.position = new Vector3(_startPosX, transform.position.y, transform.position.z);
     }

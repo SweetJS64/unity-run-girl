@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class ObstaclesSpawner : MonoBehaviour
@@ -34,6 +33,7 @@ public class ObstaclesSpawner : MonoBehaviour
         _laserObstacle.SetActive(false);
     }
     
+    //GetSet //return objects
     public GameObject[] GetRegularObstacles() => _regularObstacles;
     public GameObject GetRotateObstacle() => _rotateObstacle;
     public GameObject GetLaserObstacle() => _laserObstacle;

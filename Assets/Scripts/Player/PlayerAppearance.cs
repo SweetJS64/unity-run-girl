@@ -15,7 +15,6 @@ public class PlayerAppearance : MonoBehaviour
 
     private void Update()
     {
-        //TODO: AddStopMoving.
         if (_canMove) MovePlayer();
     }
     

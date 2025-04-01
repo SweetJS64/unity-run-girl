@@ -30,11 +30,11 @@ Transform:
   m_GameObject: {fileID: 6880163272557916529}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2.8, z: 1}
+  m_LocalScale: {x: 2, y: 1.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5715605607536169702
 SpriteRenderer:
@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpeedMove: 3.6
+  BaseCameraWidth: 17.78
 --- !u!114 &2650277298463307531
 MonoBehaviour:
   m_ObjectHideFlags: 0

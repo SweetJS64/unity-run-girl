@@ -1,13 +1,19 @@
 using UnityEngine;
 
-public class ObstacleMover : MonoBehaviour/*, IScrollingObject*/
+public class ObstacleMover : MonoBehaviour
 {
     [SerializeField] private float SpeedMove = 3.6f;
+    [SerializeField] private float BaseCameraWidth = 17.78f;
     
-    private ObstaclesManager _obstaclesController;
+    private ObstaclesManager _obstaclesManager;
     private bool _needStopping;
     private float _heightSprite;
     private static float _speedBoost = 1f;
+    
+    private float _currentWidth;
+    private float _currentHeight;
+    
+    private Camera _camera;
     
     private void Awake()
     {
@@ -22,7 +28,7 @@ public class ObstacleMover : MonoBehaviour/*, IScrollingObject*/
         }
         else
         {
-            _speedBoost = _obstaclesController.SpeedBoost;
+            _speedBoost = _obstaclesManager.SpeedBoost;
         }
         UpdateScrolling(_speedBoost);
     }
@@ -39,13 +45,18 @@ public class ObstacleMover : MonoBehaviour/*, IScrollingObject*/
 
     private void Init()
     {
-        _obstaclesController = GetComponentInParent<ObstaclesManager>();
+        _camera = Camera.main;  
+        _currentHeight = 2f * _camera.orthographicSize;
+        _currentWidth = _currentHeight * _camera.aspect;
+        SpeedMove = 3.6f * (_currentWidth / BaseCameraWidth);
+        _obstaclesManager = GetComponentInParent<ObstaclesManager>();
+        //inParent - bad/ set value from manager
         _heightSprite = GetComponent<SpriteRenderer>().bounds.size.y;
     }
 
     private void UpdateScrolling(float speedBoost)
     {
-        var minX = BordersData.Instance.MinX - _heightSprite;
+        var minX = BordersData.Instance.MinX - _heightSprite / 2;
         if (transform.position.x < minX)
         {
             gameObject.SetActive(false);
@@ -59,6 +70,6 @@ public class ObstacleMover : MonoBehaviour/*, IScrollingObject*/
     private void StopScrolling()
     {
         _needStopping = true;
-        _speedBoost = Mathf.Lerp(_speedBoost, 0, 0.1f);
+        _speedBoost = 0f;
     }
 }

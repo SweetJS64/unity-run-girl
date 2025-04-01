@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BordersData : MonoBehaviour
@@ -20,10 +18,10 @@ public class BordersData : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            Debug.LogError("BorderData not singleton");
         }
     }
-
+    
     private void CalculateBorders()
     {
         var positiveAngle = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 0));
