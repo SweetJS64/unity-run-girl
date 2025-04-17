@@ -5,6 +5,13 @@
 
 ---
 
+## Демонстрация:
+![StartGame](https://github.com/SweetJS64/RunMan/blob/main/Docs/startGame.gif)
+![GamePlay](https://github.com/SweetJS64/RunMan/blob/main/Docs/gamePlay.gif)
+![GamePlay](https://github.com/SweetJS64/RunMan/blob/main/Docs/gameOver.gif)
+
+---
+
 ## Особенности геймплея:
 - Плавное вертикальное управление персонажем
 - Анимации с переходами и эффектами (в т.ч. Particle System во время полёта)
@@ -48,26 +55,12 @@
 - **Event-driven:** `Action`, события, подписка/отписка;
 - **Save System:** Сохранение лучшего результата через `PlayerPrefs`;
 - **UI:** Отрисовка на `Canvas`, адаптация под экраны.
----
-
-## Демонстрация:
-![StartGame](https://github.com/SweetJS64/RunMan/blob/main/Docs/startGame.gif)
-![GamePlay](https://github.com/SweetJS64/RunMan/blob/main/Docs/gamePlay.gif)
-![GamePlay](https://github.com/SweetJS64/RunMan/blob/main/Docs/gameOver.gif)
 
 ---
 
 ## Автор:
 **Разработчик:** [SweetJS64](https://github.com/SweetJS64)    
 **Стек:** Unity (2D), C#, Git
-
----
-
-## Планы на будущее:
-- Добавить монеты и магазин улучшений
-- Добавить аналог самонаводящихся ракет(как в Jetpack Joyride)  
-- Реализовать достижения  
-- Интеграция SDK / загрузка на Yandex Games  
 
 ---
 
