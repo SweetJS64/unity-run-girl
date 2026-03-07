@@ -102,7 +102,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 229
-      y: 816
+      y: 811
       width: 78
       height: 155
     spriteID: 51950e95169027e46ba929e410aa5737
@@ -497,7 +497,7 @@ ScriptedImporter:
     - {x: 24, y: 23}
     - {x: 0, y: 24}
     tessellationDetail: 0
-    uvTransform: {x: 229, y: 816}
+    uvTransform: {x: 229, y: 811}
     spritePosition: {x: 358, y: 317}
   - name: arm front up
     originalName: 
@@ -1448,7 +1448,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 229
-      y: 652
+      y: 647
       width: 82
       height: 156
     spriteID: 93723167175f67d4681c908402e6132d
@@ -1862,7 +1862,7 @@ ScriptedImporter:
     - {x: 32, y: 33}
     - {x: 0, y: 33}
     tessellationDetail: 0
-    uvTransform: {x: 229, y: 652}
+    uvTransform: {x: 229, y: 647}
     spritePosition: {x: 536, y: 633}
   - name: head
     originalName: 
@@ -4111,7 +4111,7 @@ ScriptedImporter:
     - {x: 48, y: 23}
     tessellationDetail: 0
     uvTransform: {x: 229, y: 447}
-    spritePosition: {x: 542, y: -5}
+    spritePosition: {x: 542, y: 0}
   - name: leg back up
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -6698,7 +6698,7 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: 51950e95169027e46ba929e410aa5737
     layerID: 14
-    mosaicPosition: {x: 229, y: 816}
+    mosaicPosition: {x: 229, y: 811}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -6728,7 +6728,7 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: 93723167175f67d4681c908402e6132d
     layerID: 11
-    mosaicPosition: {x: 229, y: 652}
+    mosaicPosition: {x: 229, y: 647}
     flatten: 0
     isImported: 1
     isVisible: 1

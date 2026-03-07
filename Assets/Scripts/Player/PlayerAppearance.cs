@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerAppearance : MonoBehaviour
 {
+    [SerializeField] private float AppearanceSpeed = 5f;
     private Camera _cameraMain;
     private Vector3 _spawnPos;
     private Vector3 _stopPos;
@@ -37,12 +38,9 @@ public class PlayerAppearance : MonoBehaviour
     
     private void MovePlayer()
     {
-        var offset = new Vector3(
-            Mathf.Lerp(transform.position.x, _stopPos.x, 1f * Time.deltaTime), 
-            transform.position.y, 
-            0f);
-        transform.position = offset;
-        if ((int)transform.position.x >= _stopPos.x) _canMove = false;
+        var newX = Mathf.MoveTowards(transform.position.x, _stopPos.x, AppearanceSpeed * Time.deltaTime);
+        transform.position = new Vector3(newX, transform.position.y, 0f);
+        if (transform.position.x >= _stopPos.x) _canMove = false;
     }
     private void StartMove()
     {

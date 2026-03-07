@@ -8,7 +8,7 @@ public class ObstacleMover : MonoBehaviour
     private ObstaclesManager _obstaclesManager;
     private bool _needStopping;
     private float _heightSprite;
-    private static float _speedBoost = 1f;
+    private float _speedBoost = 1f;
     
     private float _currentWidth;
     private float _currentHeight;
@@ -22,14 +22,9 @@ public class ObstacleMover : MonoBehaviour
     
     private void Update()
     {
-        if (_needStopping)
-        {
-            StopScrolling();
-        }
-        else
-        {
+        if (!_needStopping)
             _speedBoost = _obstaclesManager.SpeedBoost;
-        }
+
         UpdateScrolling(_speedBoost);
     }
     

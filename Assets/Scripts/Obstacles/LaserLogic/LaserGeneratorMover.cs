@@ -4,8 +4,7 @@ using UnityEngine;
 public class LaserGeneratorMover : MonoBehaviour
 {
     [SerializeField] private float SpeedGenerators;
-    [SerializeField] private LaserObsacleInJob Laser;
-    
+
     private float _widthSprite;
     
     private float _startPosX;
@@ -31,18 +30,18 @@ public class LaserGeneratorMover : MonoBehaviour
         if (!_laserInJob)
         {
             MoveGenerator(_stopPosX);
-            if (Mathf.Abs(transform.position.x - _stopPosX) < 0.01f)
+            if (transform.position.x == _stopPosX)
             {
-                StartLaserJob.Invoke();
+                StartLaserJob?.Invoke();
                 _laserInJob = true;
             }
         }
         if (_laserInJob && _laserFinished)
         {
             MoveGenerator(_startPosX);
-            if (Mathf.Abs(transform.position.x - _startPosX) < 0.01f)
+            if (transform.position.x == _startPosX)
             {
-                DisableLaserObstacle.Invoke();
+                DisableLaserObstacle?.Invoke();
                 _laserInJob = false;
             }
         }
@@ -77,13 +76,8 @@ public class LaserGeneratorMover : MonoBehaviour
 
     private void MoveGenerator(float targetPosX)
     {
-        if (Mathf.Abs(transform.position.x - targetPosX) < 0.01f) return;
-        
-        var offset = new Vector3(
-            Mathf.Lerp(transform.position.x, targetPosX, 2.5f * Time.deltaTime), 
-            transform.position.y, 
-            0f);
-        transform.position = offset;
+        var newX = Mathf.MoveTowards(transform.position.x, targetPosX, SpeedGenerators * Time.deltaTime);
+        transform.position = new Vector3(newX, transform.position.y, 0f);
     }
 
     private void Deactivate()
